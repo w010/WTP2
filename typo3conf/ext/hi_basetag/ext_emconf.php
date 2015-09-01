@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Auto BASE tag in HEAD section',
-	'description' => 'Set config.baseURL = auto to fill the BASE tag automatically.',
+	'description' => 'Set config.baseURL = auto to fill the BASE tag automatically. (wolo fix)',
 	'category' => 'misc',
 	'author' => 'Marcin Ryżycki',
 	'author_email' => 'marcin@ryzycki.pl',
@@ -19,9 +19,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.4',
+	'version' => '0.0.5',
 	'constraints' => array(
 		'depends' => array(
+			'php' => '5.5.0-5.6.99',
+			'typo3' => '6.0.0-7.9.99',
 		),
 		'conflicts' => array(
 		),

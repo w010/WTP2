@@ -14,7 +14,7 @@ $EM_CONF[$_EXTKEY] = array (
 	'title' => 'Debugster',
 	'description' => 'Debugging made easy (sassy, colorful, sexy - the way you want it (or at least the way I think you want it))',
 	'category' => 'fe',
-	'version' => '1.4.10',
+	'version' => '1.4.10w',
 	'state' => 'stable',
 	'uploadfolder' => false,
 	'createDirs' => 0,
@@ -26,7 +26,7 @@ $EM_CONF[$_EXTKEY] = array (
 	array (
 		'depends' => 
 		array (
-			'typo3' => '6.1.0-6.2.99',
+			'typo3' => '6.1.0-7.9.99',
 		),
 		'conflicts' => 
 		array (

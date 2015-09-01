@@ -220,6 +220,28 @@ if (!wtp) var wtp = {
         var bordersEnabled = $.cookie("wtp-borders-enabled");
         if (bordersEnabled == 'true')   {   $('body.dev').addClass('wtp-borders');  }
         else                            {   $('body.dev').removeClass('wtp-borders'); }
+        
+        // insert rwd info
+        if ($('body.dev'))  {
+            $('#wtp_infobox').append('<p class="rwdinfo">');
+
+            var insertRWDinfo = function() {
+                    $('body').css('overflow', 'hidden');    // for correct measure without scrollbars
+                var width = $( window ).width();
+                var notice = 'width: ' + width;
+                    $('body').css('overflow', 'auto');
+                if      (width >= 1920)     notice += ', class: lg, hd';
+                else if (width >= 1200)     notice += ', class: lg';
+                else if (width >= 992)      notice += ', class: md';
+                else if (width >= 768)      notice += ', class: sm';
+                else if (width < 768)       notice += ', class: xs';
+
+                $('#wtp_infobox .rwdinfo').html(notice);
+            };
+
+            $( window ).resize( insertRWDinfo );
+            $( window ).load( insertRWDinfo );
+        }
     },
 
 	// enable bootstrap tables, no-ts method

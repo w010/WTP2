@@ -81,43 +81,6 @@
 
 
 
-/* FRAMES */
-
-.frame-box  {
-    background: #fff;
-    padding-bottom: 10px;
-    margin-bottom: 34px;
-}
-		/* styles with .content shouldn't be in that file, but are sometimes neccessary to overwrite and is somelike handy */
-.content .frame-box p {
-	margin-bottom: 0.8em;
-}
-    .frame-box2  {
-        background: #a6a6a6;
-        color: #fff;
-    }
-    .frame-box2 a   {
-        color: #fff;
-    }
-    /* pad everything inside except first header */
-.frame-box > *  {
-    margin: 0 12px;
-}
-    .frame-box > :first-child  {
-        margin: 0;
-    }
-.content .frame-box h2, .content .frame-box h3  {
-    padding: 8px;
-    text-transform: uppercase;
-    font-size: 1em;
-    margin-bottom: 20px;
-}
-.content .frame-box h3  {
-    color: #fff;
-    background: #a6a6a6;
-	margin-top: 0;
-}
-
 
 
 /* FOOTER */

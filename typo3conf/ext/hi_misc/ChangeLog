@@ -1,3 +1,8 @@
+2015-08-27 	<wolo.wolski@gmail.com>
+	* version 0.1.20
+	* deprecated t3lib_div call removed
+	* dependency changed: now typo3 up to 7.9
+
 2015-05-16 	<wolo.wolski@gmail.com>
 	* version 0.1.19
 	* feuserinterface deprecation log call removed

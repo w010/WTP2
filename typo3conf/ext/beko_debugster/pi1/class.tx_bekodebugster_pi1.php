@@ -38,7 +38,7 @@ if (!defined('PATH_tslib')) {
  *
  * @author	Clemens Prerovsky <Clemens.Prerovsky@beko.at>
  */
-class tx_bekodebugster_pi1 extends tslib_pibase {
+class tx_bekodebugster_pi1 extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	var $prefixId = "tx_bekodebugster_pi1";		// Same as class name
 	var $scriptRelPath = "pi1/class.tx_bekodebugster_pi1.php";	// Path to this script relative to the extension dir.
 	var $extKey = "beko_debugster";	// The extension key.
@@ -95,7 +95,7 @@ class tx_bekodebugster_pi1 extends tslib_pibase {
 		
 		if($ip != '*') {
 			$resolvedHostNames = array();
-			$ipArr = t3lib_div::trimExplode(',', $ip, true);
+			$ipArr = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $ip, true);
 			foreach($ipArr as $ipt) {
 				$resolvedHostNames[] = gethostbyname(trim($ipt));
 			}
@@ -104,7 +104,7 @@ class tx_bekodebugster_pi1 extends tslib_pibase {
 		
 		/* EDIT END */
 		
-		if (!t3lib_div::cmpIP(t3lib_div::getIndpEnv('REMOTE_ADDR'), $ip)) { return false; }
+		if (!\TYPO3\CMS\Core\Utility\GeneralUtility::cmpIP(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR'), $ip)) { return false; }
 		$this->setConfig($conf);
 		$this->backtrace = debug_backtrace();
 

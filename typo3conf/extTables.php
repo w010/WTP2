@@ -8,8 +8,8 @@
 // tt_news folder icon patch
 // https://forge.typo3.org/issues/62648
 
-$TCA['pages']['columns']['module']['config']['items'][] = array('tt-News', 'tt_news', t3lib_extMgm::extRelPath('tt_news').'res/gfx/ext_icon_ttnews_folder.gif');
-t3lib_SpriteManager::addTcaTypeIcon('pages', 'contains-tt_news', t3lib_extMgm::extRelPath('tt_news') . 'res/gfx/ext_icon_ttnews_folder.gif');
+$TCA['pages']['columns']['module']['config']['items'][] = array('tt-News', 'tt_news', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tt_news').'res/gfx/ext_icon_ttnews_folder.gif');
+\TYPO3\CMS\Backend\Sprite\SpriteManager::addTcaTypeIcon('pages', 'contains-tt_news', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tt_news') . 'res/gfx/ext_icon_ttnews_folder.gif');
 
 
 // add rte button inserttag - doesnt work!

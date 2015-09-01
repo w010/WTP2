@@ -148,41 +148,30 @@ px - em
 /**
  * Colors
  */
-#page-head {
-  background-color: #f6f6f6;
-}
-
-#page-body-top {
-  background-color: #e4e6e3;
-}
-
-#page-body {
-  background-color: #ebedeb;
-}
 
 #page-logo h1, #page-logo h1 a,
 #page-logo h2, #page-logo h2 a {
-  color: #383838;
+  /*color: #383838;*/
 }
 
 #page-logo h1 a span span {
-  color: #96bf04;
+  /*color: #96bf04;*/
 }
 
 #page-menu li, #page-menu li a {
-  color: #3e3e3e;
+  /*color: #3e3e3e;*/
 }
 
 #page-menu li a:hover, #page-menu li.item-act a {
-  color: #96bf04;
+  /*color: #96bf04;*/
 }
 
 #foot-content a {
-  color: #252525;
+  /*color: #252525;*/
 }
 
 #foot-content a:hover {
-  color: #676767;
+  /*color: #676767;*/
 }
 
 .content {
@@ -386,6 +375,13 @@ p .detail {
   padding-left: 5px;
 }
 
+
+
+
+
+/* FRAMES */
+
+
 .csc-frame-rulerBefore {
   margin-top: 10px;
   padding-top: 10px;
@@ -406,6 +402,45 @@ p .detail {
   border-bottom: 1px solid #E3E3E3;
 }
 
+
+
+.frame-box  {
+    background: #fff;
+    padding-bottom: 10px;
+    margin-bottom: 34px;
+}
+		/* styles with .content shouldn't be in that file, but are sometimes neccessary to overwrite and is somelike handy */
+.content .frame-box p {
+	margin-bottom: 0.8em;
+}
+    .frame-box2  {
+        background: #a6a6a6;
+        color: #fff;
+    }
+    .frame-box2 a   {
+        color: #fff;
+    }
+    /* pad everything inside except first header */
+.frame-box > *  {
+    margin: 0 12px;
+}
+    .frame-box > :first-child  {
+        margin: 0;
+    }
+.content .frame-box h2, .content .frame-box h3  {
+    padding: 8px;
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+.content .frame-box h3  {
+    color: #fff;
+    background: #a6a6a6;
+	margin-top: 0;
+}
+
+
+
 .content-wrap {
   position: relative;
   z-index: 1;
@@ -419,6 +454,7 @@ p .detail {
   padding-left: 100px;
 }
 
+
 /*
 .col2 ol li	{
 	background: transparent url('../images/ol-1.gif') scroll no-repeat 0 2px;
@@ -429,7 +465,12 @@ p .detail {
 .col2 ol li:nth-child(2)	{	background-image: url('../images/ol-2.gif');	}
 .col2 ol li:nth-child(3)	{	background-image: url('../images/ol-3.gif');	}
 */
+
+
+
+
 /* arrows, dots */
+
 p.arrow-right {
   padding-right: 20px;
   background: transparent url("../images/arrow2.gif") scroll no-repeat 100% 3px;

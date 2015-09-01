@@ -28,8 +28,8 @@ class tx_hibasetag {
 	}
 	
 	public function getBaseUrl() {
-		$baseUrl =  t3lib_div::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://';
-		$baseUrl .= t3lib_div::getIndpEnv('HTTP_HOST').($GLOBALS['TSFE']->absRefPrefix?$GLOBALS['TSFE']->absRefPrefix:'/');
+		$baseUrl =  \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://';
+		$baseUrl .= \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('HTTP_HOST').($GLOBALS['TSFE']->absRefPrefix?$GLOBALS['TSFE']->absRefPrefix:'/');
 		return $baseUrl;
 	}
 }

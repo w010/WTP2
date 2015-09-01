@@ -70,7 +70,7 @@ class tx_himisc_div {
 		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['hi_misc']['getBodyTag-postProc']))	{
 			$_params = array( 'id' => &$id, 'classes' => &$classes, 'params'=>&$params, 'conf'=>$conf );
 			foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['hi_misc']['getBodyTag-postProc'] as $_funcRef) {
-				t3lib_div::callUserFunction($_funcRef, $_params, $this, '');
+				\TYPO3\CMS\Core\Utility\GeneralUtility::callUserFunction($_funcRef, $_params, $this, '');
 			}
 		}
 

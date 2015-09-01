@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 /**
- * WTP2 v2.62.3
+ * WTP2 v2.62.4
  * Wolo TYPO3 Pack
  * 2015-08
  * wolo.pl '.' studio
@@ -33,7 +33,7 @@ define('CLI', intval(
 ));
 
 putenv("DEV=".intval(DEV)); // make them available from TS: [globalVar= ENV:DEV=1]
-putenv("DEVS=".intval(TESTDEVS));
+putenv("TESTDEVS=".intval(TESTDEVS));
 putenv("LOCAL=".intval(LOCAL));
 
 // helps in styling in some cases
@@ -44,8 +44,8 @@ define('NO_DEBUG', (bool)$_GET['no_debug']);
 
 // all DEV envs
 if (DEV)	{
-	//$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_path'] = '/usr/bin/';
-	//$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_path_lzw'] = '/usr/bin/';
+	$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'mbox';
+	$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_mbox_file'] = PATH_site.'mails-out.txt';
 }
 
 // next environments should be after DEV, to overwrite own settings
@@ -64,9 +64,7 @@ if (LOCAL)  {
 	$GLOBALS['TYPO3_CONF_VARS']['DB']['password'] = '';
 	$GLOBALS['TYPO3_CONF_VARS']['DB']['database'] = 'baza833_';*/
 
-	$GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'sendmail';
-
-	$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_path'] = 'D:\xampp\ImageMagick-6.8.1-9\\';
+	$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_path'] = 'D:\xampp\ImageMagick-6.8.1-9\\';	// for some reason two backslashes
 	$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_path_lzw'] = 'D:\xampp\ImageMagick-6.8.1-9\\';
 	$GLOBALS['TYPO3_CONF_VARS']['GFX']['im_version_5'] = '6';
 	$GLOBALS['TYPO3_CONF_VARS']['GFX']['colorspace'] = 'sRGB';
@@ -80,7 +78,7 @@ if (LOCAL)  {
 	//$GLOBALS['TYPO3_CONF_VARS']['EXT']['runtimeActivatedPackages'] = array('devlog');
 
 
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = (DEV?'DEV ':'') . (LOCAL?'LOCAL ':'') . $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = (DEV?'DEV ':'') . (LOCAL?'LOCAL ':'') . (TESTDEVS?'TESTDEVS ':'') . $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['enableDeprecationLog'] = DEV?'file':false;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors'] = -1;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['exceptionalErrors'] = E_ALL ^ E_STRICT ^ E_NOTICE ^ E_WARNING ^ E_USER_ERROR ^ E_USER_NOTICE ^ E_USER_WARNING;
