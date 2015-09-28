@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 /**
  * WTP2 v2.62.4
  * Wolo TYPO3 Pack
- * 2015-08
+ * 2015-09
  * wolo.pl '.' studio
  *
  * (version convention explain: vA.B.C means: A=2 because WTP2,  B=nn is like T3-branch n.n,  C is WTP version itself.)
@@ -80,10 +80,10 @@ if (LOCAL)  {
 
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = (DEV?'DEV ':'') . (LOCAL?'LOCAL ':'') . (TESTDEVS?'TESTDEVS ':'') . $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['enableDeprecationLog'] = DEV?'file':false;
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors'] = -1;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['displayErrors'] = LOCAL? 1 : DEV? 2 : -1;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['exceptionalErrors'] = E_ALL ^ E_STRICT ^ E_NOTICE ^ E_WARNING ^ E_USER_ERROR ^ E_USER_NOTICE ^ E_USER_WARNING;
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['sqlDebug'] = DEV ? 1 : 0;
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] = NO_DEBUG?'':implode(',', array(
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] = NO_DEBUG? '' :LOCAL? '*' :implode(',', array(
 	'all' => DEV?'*':'',
 	'wolo-pzn' => '85.221.134.155',
 ));

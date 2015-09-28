@@ -1,7 +1,7 @@
 <?php
 
 // WTP DUMP/BACKUP TOOL - wolo.pl '.' studio
-// v0.7
+// v0.8
 // 2015
 //
 // dump / zapalniczka73
@@ -49,13 +49,13 @@ var_dump(DEV62);*/
 // old type array to be compatible with older installations
 $options = array(
 	// script only displays generated command line, but doesn't exec it
-	'dontExecCommands' => 1,
+	'dontExecCommands' => LOCAL ? 0 :   1,
 
 	// exec commands, but don't show them
-	'dontShowCommands' => 0,
+	'dontShowCommands' => LOCAL ? 0 :   0,
 
 	// 'password'
-	 'version' => '0.7',
+	 'version' => '0.8',
 );
 
 
@@ -148,20 +148,39 @@ function main()	{
 			$dumpFilename = str_replace(' ', '_', $projectName);
 
 			if ($action == 'quickdump')	{
-				exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="typo3temp" --exclude="DUMP" --exclude="uploads" -exclude="typo3_src-*"  ');
-				echr ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="typo3temp" --exclude="DUMP" --exclude="uploads" -exclude="typo3_src-*"  ');
+				/*exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="typo3temp" --exclude="DUMP" --exclude="uploads" -exclude="typo3_src-*"  ');
+				echr ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="typo3temp" --exclude="DUMP" --exclude="uploads" -exclude="typo3_src-*"  ');*/
+				
+				//exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../typo3conf ./../fileadmin --exclude="fileadmin/contents"  ');
+				exec_control ('tar -zcf '.$dumpFilename.'-v'.$projectVersion.'.tgz ./../typo3conf ./../fileadmin --exclude="fileadmin/contents"  ');
+				echr ('tar -zcf '.$dumpFilename.'-v'.$projectVersion.'.tgz ./../typo3conf ./../fileadmin --exclude="fileadmin/contents"  ');
+				
+				// working on win, check on lin
+
 			} else if ($action == 'databasedump')	{
 				// do nothing, don't dump filesystem
 			} else	{
 				exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="DUMP" ');
 				echr ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.tgz ./../* --exclude="DUMP" ');
 			}
+			
+			if (LOCAL)	{
+				//d:\xampp\mysql\bin\mysqldump 
+				exec_control ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.$projectName.'-v'.$projectVersion.'.sql"');
+				echr ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.$projectName.'-v'.$projectVersion.'.sql"');
+				
+				exec_control ('tar -zcf '.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.$projectName.'-v'.$projectVersion.'.sql');
+				echr ('tar -zcf '.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.$projectName.'-v'.$projectVersion.'.sql');
+			}
+			else	{
+				exec_control ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql"');
+				echr ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql"');
+				
+				exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql');
+				echr ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql');
+			}
 
-			exec_control ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql"');
-			echr ('mysqldump --complete-insert --add-drop-table --no-create-db --skip-set-charset --quick --lock-tables --add-locks --default-character-set=utf8 --host='.$typo_db_host.' --user='.$typo_db_username.' --password="'.$typo_db_password.'" '.$typo_db.' > "'.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql"');
-
-			exec_control ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql');
-			echr ('tar -zcf '.PATH_work.'DUMP/'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz '.PATH_work.'DUMP/'.$projectName.'-v'.$projectVersion.'.sql');
+			
 
 			if (!$options['dontExecCommands']) echr( '<br><a href="'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz">'.$dumpFilename.'-v'.$projectVersion.'.sql.tgz</a>' );
 			break;
@@ -241,7 +260,8 @@ footer  {font-size: 80%;}
 		<label> <span>export/dump DB &gt;</span><input name='action' type='radio' value='databasedump'> <br class='clear'></label>
 		<label> <span>import DB &lt;</span> <input name='action' type='radio' value='importdb'> <br class='clear'></label>
 		<label> <span>dump WHOLE SITE</span><input name='action' type='radio' value='dump'> <br class='clear'></label>
-		<label> <span>quickdump (exclude temp,uploads,src)</span><input name='action' type='radio' value='quickdump'> <br class='clear'></label>
+		<!--<label> <span>quickdump (exclude temp,uploads,src)</span><input name='action' type='radio' value='quickdump'> <br class='clear'></label>-->
+		<label> <span>quickdump (typo3conf, fileadmin without contents)</span><input name='action' type='radio' value='quickdump'> <br class='clear'></label>
 		<label> <span>backup filesystem</span> <input name='action' type='radio' value='backup'> <br class='clear'></label>
 		<label> <span>backup clean</span> <input name='action' type='radio' value='backupclean'> <br class='clear'></label>
 	</div>

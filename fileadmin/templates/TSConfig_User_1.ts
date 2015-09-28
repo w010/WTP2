@@ -11,6 +11,11 @@ options.pageTree.showDomainNameWithTitle = 1
 options.pageTree.showNavTitle = 1
 options.pageTree.hideFilter = 0
 
+options.clearCache.system = 1
+options.clearCache.all = 1
+
+
+
 mod.web_list {
    clickTitleMode = edit
    alternateBgColors = 1
@@ -24,11 +29,6 @@ TCAdefaults {
 	#tt_news.hidden = 1
 	#tt_news_cat.hidden = 1
 }
-
-options.clearCache.system = 1
-options.clearCache.all = 1
-
-
 
 
 

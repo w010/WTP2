@@ -31,6 +31,9 @@ plugin.tt_news {
 		disabledLinkWrap = <span class="disabledLinkWrap">|</span>
 		inactiveLinkWrap = <span class="inactiveLinkWrap">|</span>
 		activeLinkWrap = <span class="activeLinkWrap">|</span>
+		
+		# for eg. images or spans
+		# hscText = 0
 	}
 
 	# categories selection

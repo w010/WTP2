@@ -187,5 +187,7 @@ RewriteRule .* index.php [L]
 
 ### End: Miscellaneous ###
 
+Order allow,deny
+Allow from all
 
 

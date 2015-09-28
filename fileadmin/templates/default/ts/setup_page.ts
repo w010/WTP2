@@ -127,16 +127,19 @@ page.includeJS	{
 }
 
 page.includeJSFooter {
-	bootstrap = fileadmin/templates/default/js/bootstrap.min.js
-	#jquery_cookie = fileadmin/templates/default/js/jquery.cookie.js
-    #jquery_carousel = fileadmin/templates/default/js/jquery.carousel.js
+	bootstrap = 			fileadmin/templates/default/js/bootstrap.min.js
+	
+	#jquery_cookie = 		fileadmin/templates/default/js/jquery.cookie.js
+    #jquery_carousel =		fileadmin/templates/default/js/jquery.carousel.js
+    #jquery_columnizer = 	fileadmin/templates/default/js/jquery.columnizer.js
+    #jscroller = 			fileadmin/templates/default/js/jquery.simplyscroll.min.js
+    #superfish = 			fileadmin/templates/default/js/superfish.js
+    
+    # jquery plugins
+	plugins = 				fileadmin/templates/default/js/plugins.js
 
-    #jquery_columnizer = fileadmin/templates/default/js/jquery.columnizer.js
-    #jscroller = fileadmin/templates/default/js/jquery.simplyscroll.min.js
-    #superfish = fileadmin/templates/default/js/superfish.js
-
-    # main custom js for site. like ts setup.lib, should be on the end
-	code = fileadmin/templates/default/js/code.js
+    # main custom js for site. just like ts setup.lib - should be on the end, when all is loaded
+	code = 					fileadmin/templates/default/js/code.js
 }
 
 # auto reload css every configured time. use &autocss=1 in url

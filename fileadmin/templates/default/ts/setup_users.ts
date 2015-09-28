@@ -26,7 +26,7 @@ plugin.tx_srfeuserregister_pi1	{
 
 plugin.tx_felogin_pi1	{
  	templateFile = fileadmin/templates/default/html/tx_felogin.html
- 	storagePid = 8
+ 	storagePid = 12
  	showForgotPasswordLink = 0
  	showPermaLogin = 1
  	 	

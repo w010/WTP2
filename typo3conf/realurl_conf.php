@@ -34,7 +34,7 @@ $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = array(
 	),
 	'fixedPostVars' => Array(
 		// user
-		'27' => Array(
+		'20' => Array(
 			Array (
 				'GETvar' => 'tx_felogin_pi1[forgot]',
 				'valueMap' => array (
@@ -52,15 +52,14 @@ $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = array(
 
 
 		// TwojeKonto / rejestracja
-		/*'86' => 'reg_form', // rejestracja uzytkownika
-		'87' => 'reg_form', // rejestracja firmy
-		'88' => 'reg_form', // rejestracja lekarza
+		/*'86' => 'reg_form', // registration user
+		'87' => 'reg_form', // registration company
 		'reg_form' => array(
 			array (
 				'GETvar' => 'tx_srfeuserregister_pi1[cmd]',
 				'valueDefault' => 'create',
 			),
-			// array ( 'GETvar' => 'tx_srfeuserregister_pi1[token]' ) // problem, nie wlaczac!
+			// array ( 'GETvar' => 'tx_srfeuserregister_pi1[token]' ) // problem, don't enable!
 		),*/
 
 
@@ -116,6 +115,7 @@ $TYPO3_CONF_VARS['EXTCONF']['realurl']['_DEFAULT'] = array(
 					'userFunc' => 'EXT:hi_misc/class.tx_himisc_realurl.php:&tx_himisc_realurl->recalculatePageNumber'
 				),
 			),
+			/* what extension makes tags for tt_news? */
 			/*'tagname' => array (
 					array(
 						'GETvar' => 'tx_ttnews[tag]',

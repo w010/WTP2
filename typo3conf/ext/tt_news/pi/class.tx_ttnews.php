@@ -660,13 +660,17 @@ class tx_ttnews extends tslib_pibase {
 			$newsCount = 0;
 			$countSelConf = $selectConf;
 			unset($countSelConf['orderBy']);
+			$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 1;
+
 
 			if (($res = $this->exec_getQuery('tt_news', $countSelConf))) {
 				list($newsCount) = $this->db->sql_fetch_row($res);
 				$this->db->sql_free_result($res);
 			}
+			if (isset($GLOBALS['w_ttnews_showSQL']) && $GLOBALS['w_ttnews_showSQL'])
+				debugster($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
 			$this->newsCount = $newsCount;
-//			debugster($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
+
 
 			// Only do something if the query result is not empty
 			if ($newsCount > 0) {
@@ -683,7 +687,8 @@ class tx_ttnews extends tslib_pibase {
 
 				// build query for display:
 				if ($selectConf['leftjoin'] || ($this->theCode == 'RELATED' && $this->relNewsUid)) {
-					$selectConf['selectFields'] = 'DISTINCT tt_news.uid, tt_news.*';
+					// wolo mod: selectFieldsFromJoin
+					$selectConf['selectFields'] = 'DISTINCT tt_news.uid, tt_news.*'  . ($selectConf['selectFieldsFromJoin'] ? ', '. $selectConf['selectFieldsFromJoin'] : '');
 				} else {
 					$selectConf['selectFields'] = 'tt_news.*';
 				}
@@ -927,17 +932,17 @@ class tx_ttnews extends tslib_pibase {
 		}
 
 		$limit = $this->config['limit'];
+		$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 1;
+
 
 		$lConf = $this->conf[$prefix_display . '.'];
 		$res = $this->exec_getQuery('tt_news', $selectConf); //get query for list contents
 
 //				debug($selectConf, $this->theCode.' final $selectConf (' . __CLASS__ . '::' . __FUNCTION__ . ')', __LINE__, __FILE__, 3);
 
-
-		// wolo mod
-		if (isset($GLOBALS['w_ttnews_showSQL']) && $GLOBALS['w_ttnews_showSQL'])
-			debugster($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
-
+        // wolo mod
+        if (isset($GLOBALS['w_ttnews_showSQL']) && $GLOBALS['w_ttnews_showSQL'])
+            debugster($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
 
 		// make some final config manipulations
 		// overwrite image sizes from TS with the values from content-element if they exist.
@@ -976,8 +981,27 @@ class tx_ttnews extends tslib_pibase {
 				'year' => ($this->conf['dontUseBackPid'] ? null : ($this->piVars['year'] ? $this->piVars['year'] : null)),
 				'month' => ($this->conf['dontUseBackPid'] ? null : ($this->piVars['month'] ? $this->piVars['month'] : null)));
 
+		// WOLO MOD - ADD HOOK TO ALLOW PUTTING CODE BETWEEN RENDERED ITEMS (TO PUT THERE CUSTOM ELEMENTS)
+		$itemsOutArr = [];
+
+		// WOLO MOD - ADD HOOK TO PROCESS ELEMENTS BEFORE DISPLAY
+		//$rows = [];
+
 		// Getting elements
 		while (($row = $this->db->sql_fetch_assoc($res))) {
+			/*$rows[] = $row;
+		}
+
+		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['processListElementsHook'])) {
+			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['processListElementsHook'] as $_classRef) {
+				$_procObj = & t3lib_div::getUserObj($_classRef);
+				$_procObj->processListElements($this, $rows);
+			}
+		}
+
+		foreach ($rows as $row) {*/
+		// wolo mod end.
+
 			// gets the option splitted config for this record
 			if ($this->conf['enableOptionSplit'] && ! empty($this->splitLConf[$cc])) {
 				$lConf = $this->splitLConf[$cc];
@@ -1084,8 +1108,12 @@ class tx_ttnews extends tslib_pibase {
 
 			$layoutNum = ($itempartsCount == 0 ? 0 : ($cc % $itempartsCount));
 
+			// wolo mod
+			// allow to put code between rendered items. to do so, store items code in array and implode later.
+
 			// Store the result of template parsing in the Var $itemsOut, use the alternating layouts
-			$itemsOut .= $this->cObj->substituteMarkerArrayCached($itemparts[$layoutNum], $markerArray, array(), $wrappedSubpartArray);
+			$itemsOutArr[] = $this->cObj->substituteMarkerArrayCached($itemparts[$layoutNum], $markerArray, array(), $wrappedSubpartArray);
+			//$itemsOut .= $this->cObj->substituteMarkerArrayCached($itemparts[$layoutNum], $markerArray, array(), $wrappedSubpartArray);
 			$cc++;
 			if ($cc == $limit) {
 				break;
@@ -1097,7 +1125,15 @@ class tx_ttnews extends tslib_pibase {
 			$this->hObj->getParsetime(__METHOD__);
 		}
 
-		return $itemsOut;
+		// wolo mod
+		//return $itemsOut;
+		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['processListElementsRenderedHook'])) {
+			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['processListElementsRenderedHook'] as $_classRef) {
+				$_procObj = & t3lib_div::getUserObj($_classRef);
+				$_procObj->processListElementsRendered($this, $itemsOutArr, $lConf);
+			}
+		}
+		return implode('', $itemsOutArr);
 	}
 
 
@@ -1515,7 +1551,11 @@ class tx_ttnews extends tslib_pibase {
 				if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['userDisplayCatmenuHook'])) {
 					foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tt_news']['userDisplayCatmenuHook'] as $_classRef) {
 						$_procObj = & t3lib_div::getUserObj($_classRef);
-						$content = $_procObj->userDisplayCatmenu($lConf, $this);
+						// wolo mod
+						// bug, if more hooks of that kind it renders only one usercatmenu (from last loaded ext)
+						// must try to render all of them and in all hooks check displayCatMenu.mode
+						//$content = $_procObj->userDisplayCatmenu($lConf, $this);
+						$content .= $_procObj->userDisplayCatmenu($lConf, $this);
 					}
 				}
 				break;

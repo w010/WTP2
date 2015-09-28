@@ -69,7 +69,6 @@ plugin.tx_macinasearchbox_pi1 {
 	pidSearchpage = 17
 	templateFile = fileadmin/templates/default/html/tx_macinasearchbox.html
 }
-
 plugin.tx_ryzyflash_pi1 {
 	# default required flash version
 	fp = 9.0.45
