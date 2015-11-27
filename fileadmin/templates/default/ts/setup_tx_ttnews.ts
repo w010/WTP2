@@ -24,13 +24,24 @@ plugin.tt_news {
 		dontLinkActivePage = 0
 		
 		#check these, try to uncomment 
-		browseBoxWrap.wrap = <div class="browseBoxWrap">|</div>
-		showResultsWrap.wrap = <div class="showResultsWrap">|</div>
-		browseLinksWrap.wrap = <div class="browseLinksWrap">|</div>
-		showResultsNumbersWrap.wrap = <span class="showResultsNumbersWrap">|</span>
-		disabledLinkWrap = <span class="disabledLinkWrap">|</span>
-		inactiveLinkWrap = <span class="inactiveLinkWrap">|</span>
-		activeLinkWrap = <span class="activeLinkWrap">|</span>
+		#browseBoxWrap.wrap = <div class="browseBoxWrap">|</div>
+	  #showResultsWrap.wrap = <div class="showResultsWrap">|</div>
+	  #browseLinksWrap.wrap = <div class="browseLinksWrap">|</div>
+	  #showResultsNumbersWrap.wrap = <span class="showResultsNumbersWrap">|</span>
+	  #disabledLinkWrap = <span class="disabledLinkWrap">|</span>
+	  #inactiveLinkWrap = <span class="inactiveLinkWrap">|</span>
+	  #activeLinkWrap = <span class="activeLinkWrap">|</span>
+
+		# bootstrap pagination style
+		
+		#browseBoxWrap.wrap = <div class="browseBoxWrap">|</div>
+		#showResultsWrap.wrap = <div class="showResultsWrap">|</div>
+		#showResultsNumbersWrap.wrap = <span class="showResultsNumbersWrap">|</span>
+		
+		browseLinksWrap = <ul class="pagination">|</ul>
+		disabledLinkWrap = <li class="disabled"><a>|</a></li>
+		inactiveLinkWrap = <li class="inactiveLinkWrap">|</li>
+		activeLinkWrap = <li class="active">|</li>
 		
 		# for eg. images or spans
 		# hscText = 0
@@ -230,6 +241,19 @@ plugin.tt_news.displaySingle.date_stdWrap.strftime = e-%m-%Y
 
 
 
+
+# Ajax tt_news using w_tools
+# TODO: must set this for all ajax instances!
+# uid of ce should be passed in ajax call!
+
+	[globalVar = TSFE:id = 30]
+	wtools_ttnews_ajax {
+		#10.source.data = GP:uid
+		# to conf
+		# should be set per page/instance
+		10.source = 25
+	}
+	[global]
 
 
 

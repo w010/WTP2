@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Default template for plugin &quot;tx_ttnewscalendar_pi1&quot;</title>
+	<style type="text/css">
+		body {
+			font-family:sans-serif;
+		}
+		div.template {
+			border:1px solid #000;
+			background-color:#aaa;
+			font-family:serif;
+			padding:5px;
+		}
+	</style>
+</head>
+
+<body>
+
+
+
+<h2>Default template for plugin &quot;tx_shopsearchitems_pi1&quot;</h2>
+
+<div class="template">
+<!-- ###TEMPLATE_CALENDAR### begin -->
+
+	<div class="tx-ttnewscalendar-pi1-calendar">
+
+        <!--TYPO3SEARCH_end-->
+
+
+
+        <div class="tx-ttnewscalendar-pi1-calendar-header">
+            <div class="tx-ttnewscalendar-pi1-calendar-prev">###MONTH_PREV###</div>
+            <div class="tx-ttnewscalendar-pi1-calendar-month">###MONTH### ###YEAR###</div>
+            <div class="tx-ttnewscalendar-pi1-calendar-next">###MONTH_NEXT###</div>
+        </div>
+        <div class="tx-ttnewscalendar-pi1-calendar-table">
+
+            <!-- ###TEMPLATE_CALENDAR_DOW_ROW### begin -->
+                <div class="tx-ttnewscalendar-pi1-calendar-row tx-ttnewscalendar-pi1-calendar-row-dow">
+
+                    <!-- ###TEMPLATE_CALENDAR_DOW_ITEM### begin -->
+                        <div class="tx-ttnewscalendar-pi1-calendar-item tx-ttnewscalendar-pi1-calendar-item-dow">###DOW###</div>
+                    <!-- ###TEMPLATE_CALENDAR_DOW_ITEM### end -->
+
+                </div>
+            <!-- ###TEMPLATE_CALENDAR_DOW_ROW### end -->
+
+            <!-- ###TEMPLATE_CALENDAR_ROW### begin -->
+                <div class="tx-ttnewscalendar-pi1-calendar-row">
+
+                    <!-- ###TEMPLATE_CALENDAR_ITEMS### begin -->
+
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_EMPTY### begin -->
+                            <div class="tx-ttnewscalendar-pi1-calendar-item tx-ttnewscalendar-pi1-calendar-item-empty">&nbsp;</div>
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_EMPTY### end -->
+
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_PAST### begin -->
+                            <div class="tx-ttnewscalendar-pi1-calendar-item tx-ttnewscalendar-pi1-calendar-item-past ###CLASS_ITEM###">
+                                ###ITEM###
+                            </div>
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_PAST### end -->
+
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_TODAY### begin -->
+                            <div class="tx-ttnewscalendar-pi1-calendar-item tx-ttnewscalendar-pi1-calendar-item-today ###CLASS_ITEM###">
+                                ###ITEM###
+                            </div>
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_TODAY### end -->
+
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_FUTURE### begin -->
+                            <div class="tx-ttnewscalendar-pi1-calendar-item tx-ttnewscalendar-pi1-calendar-item-future ###CLASS_ITEM###">
+                                ###ITEM###
+                            </div>
+                        <!-- ###TEMPLATE_CALENDAR_ITEM_FUTURE### end -->
+
+                    <!-- ###TEMPLATE_CALENDAR_ITEMS### end -->
+
+                </div>
+            <!-- ###TEMPLATE_CALENDAR_ROW### end -->
+		</div>
+        <!--TYPO3SEARCH_begin-->
+	</div>
+
+    <br class="clear">
+
+
+<script>
+
+var newsCalendar = function() 	{
+
+  	//this. currentNote = 0;
+  	//$ = jQuery;
+  	
+	this. getMonth = function(month, categoryFilter)	{
+		var pobj = this;
+	    //console.log('db');
+		pobj.animationStart();
+		
+		$.ajax({
+	        type: "GET",
+	        url: "###URL_AJAX###",
+	        data: 'tx_ttnewscalendar_pi1[month]='+month+ (categoryFilter ? ('&tx_ttnews[cat]='+categoryFilter) : ''),
+	        //dataType: "json",
+	        success: function(res) {
+	            if(parseInt(res)!=0)    // if no errors
+	            {
+	            	pobj.animationStop();
+	            	$('.tx-ttnewscalendar-pi1').html(res);
+				}
+			}
+		})
+	};
+	this. animationStart = function()	{
+		$('.tx-ttnewscalendar-pi1').addClass('loading')
+		.animate({
+    		opacity: 0.6
+    	}, 300, function() {
+    		// Animation complete.
+  		});
+	};
+	this. animationStop = function()	{
+		$('.tx-ttnewscalendar-pi1').removeClass('loading')
+		.animate({
+    		opacity: 1
+    	}, 300, function() {
+    		// Animation complete.
+  		});
+	};
+}
+
+</script>
+
+<!-- ###TEMPLATE_CALENDAR### end -->
+</div>
+
+
+
+</body>
+
+</html>

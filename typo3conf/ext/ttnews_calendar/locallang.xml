@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for extension 'ttnews_calendar'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pi1_title">News Calendar</label>
+			<label index="pi1_plus_wiz_description">Adds calendar with tt_news events</label>
+			<label index="flexform">Basic Options</label>
+			<label index="flexform.templateFile">Template File</label>
+			<label index="flexform.storePid">tt_news Store Page ID</label>
+			<label index="flexform.newsListPid">Page ID where tt_news with code "LIST" is set</label>
+			<label index="flexform.newsSinglePid">Page ID where tt_news with code "SINGLE" is set</label>
+			<label index="flexform.target">Target of Links to tt_news Pages</label>
+			<label index="flexform.dowForm">Day of week form</label>
+			<label index="flexform.dowForm.full">Full (eg. Monday)</label>
+			<label index="flexform.dowForm.3ltrs">3 Letters (eg. Mon)</label>
+			<label index="flexform.dowForm.2ltrs">2 Letters (eg. Mo)</label>
+		</languageKey>
+		<languageKey index="ru" type="array">
+			<label index="pi1_title">Календарь новостей</label>
+			<label index="pi1_plus_wiz_description">Добавляет календарь с отмеченными датами новостей плагина tt_news</label>
+			<label index="flexform">Основные параметры</label>
+			<label index="flexform.templateFile">Файл шаблона</label>
+			<label index="flexform.storePid">Страница с записями tt_news</label>
+			<label index="flexform.newsListPid">Страница с плагином tt_news, код "LIST"</label>
+			<label index="flexform.newsSinglePid">Страница с плагином tt_news, код "SINGLE"</label>
+			<label index="flexform.target">Links to tt_news Pages Target</label>
+			<label index="flexform.dowForm">Форма отображения дня недели</label>
+			<label index="flexform.dowForm.full">Полное (eg. Понедельник)</label>
+			<label index="flexform.dowForm.3ltrs">3 буквы (eg. Пон)</label>
+			<label index="flexform.dowForm.2ltrs">2 буквы (eg. Пн)</label>
+		</languageKey>
+	</data>
+</T3locallang>

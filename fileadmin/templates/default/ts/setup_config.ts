@@ -93,30 +93,4 @@ temp.pageTitle.30 {
 [end]
 
 
-# WTP INFO BOX
-
-page.3 = COA
-page.3.wrap = <div id="wtp_infobox" class="well well-sm" title="double click to toggle borders (DEV only)"> | </div>
-
-[globalVar= ENV:DEV=1]
-	page.3.10 = TEXT
-	page.3.10.value = <p>DEV</p>
-[end]
-[globalVar= ENV:LOCAL=1]
-	page.3.11 = TEXT
-	page.3.11.value = <p>LOCAL</p>
-[end]
-[globalVar= ENV:TESTDEVS=1]
-	page.3.12 = TEXT
-	page.3.12.value = <p>TESTDEVS</p>
-[end]
-
-# Cache disabled for beuser
-[globalVar = TSFE:beUserLogin = 1]
-	config.no_cache = 1
-	page.bodyTagCObject.additionalClasses.beuser = beuser
-	page.3.20 = TEXT
-	page.3.20.value = <p>Cache disabled - BE user logged in</p>
-[end]
-
 

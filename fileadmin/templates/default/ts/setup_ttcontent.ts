@@ -1,3 +1,8 @@
+
+
+# http://typo3.org/news/article/responsive-image-rendering-in-typo3-cms-62/
+
+
 # is this working as expected in 6?
 lib.stdheader.10.setCurrent.htmlSpecialChars = 0
 lib.stdheader.10.setCurrent.wrap = <span> | </span>

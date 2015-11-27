@@ -1,0 +1,12 @@
+// opisac tutaj ustawienia dla biezacego projektu
+xs - 480 / 320
+sm - 768 / 768
+md - 992 / 980
+lg - 1280 / 1260
+
+modyfikacja bootstrap - zmienione te wielkosci w liniach 1597 - 1610
+
+UPDATE bootstrap:
+bardzo proste, customize, wszystkie opcje tak jak byly, wszystko wlaczone, zmienic te szerokosci w bootstrap.css, jesli sie roznia.
+reszte nadpisac
+

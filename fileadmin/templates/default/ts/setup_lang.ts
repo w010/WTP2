@@ -1,3 +1,7 @@
+# todo: implement hreflang tags (urls to other languages)
+# https://support.google.com/webmasters/answer/6059209
+
+
 # How to handle localization, possible values:
 # content_fallback: the system will always operate with the selected language even if the page is not translated with a page overlay record.
 # strict: the system will report an error if the requested translation does not exist

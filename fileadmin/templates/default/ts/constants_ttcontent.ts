@@ -37,3 +37,8 @@ styles.content.imgtext {
 [globalVar= GP:tx_ttnews|tt_news > 0 ]
 #styles.content.imgtext.maxW = 530
 [end]
+
+# very interesting condition
+#[globalVar = TSFE:register|tx_himisc_div.templavoila.to = 2]
+#styles.content.imgtext.maxW = 960
+#[end]

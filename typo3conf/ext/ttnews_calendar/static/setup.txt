@@ -1,0 +1,31 @@
+plugin.tx_ttnewscalendar_pi1 {
+	templateFile = {$plugin.tx_ttnewscalendar_pi1.templateFile}
+	storePid = {$plugin.tx_ttnewscalendar_pi1.storePid}
+	newsListPid = {$plugin.tx_ttnewscalendar_pi1.newsListPid}
+	newsSinglePid = {$plugin.tx_ttnewscalendar_pi1.newsSinglePid}
+	target = {$plugin.tx_ttnewscalendar_pi1.target}
+	dowForm = {$plugin.tx_ttnewscalendar_pi1.dowForm}
+	newsCategory = {$plugin.tx_ttnewscalendar_pi1.newsCategory}
+	viewTwoMonths = {$plugin.tx_ttnewscalendar_pi1.viewTwoMonths}
+	linkDaysFilter = {$plugin.tx_ttnewscalendar_pi1.linkDaysFilter}
+	joinCategoriesTable = {$plugin.tx_ttnewscalendar_pi1.joinCategoriesTable}
+	
+	_CSS_DEFAULT_STYLE (
+		.tx-ttnewscalendar-pi1-calendar-prev {
+			float: left;
+		}
+		.tx-ttnewscalendar-pi1-calendar-next {
+			float: right;
+		}
+		.tx-ttnewscalendar-pi1-calendar-header {
+			text-align: center;
+		}
+		.tx-ttnewscalendar-pi1-calendar-row {
+			clear: both;
+		}
+		.tx-ttnewscalendar-pi1-calendar-item {
+			width: 14.28%;
+			float: left;
+		}
+	)
+}

@@ -127,6 +127,8 @@ p.bodytext a {
 }
 
 
+
+
 .only-dev	{
 	display: none;
 }
@@ -136,27 +138,45 @@ p.bodytext a {
 
 
 
+/* WTP INFOBOX v4 */
 #wtp_infobox	{
 	display: none;
 	visibility: hidden;	/* avoid blinking, unhide in js */
-	position: absolute;
+	position: fixed;
 	left: 600px;
 	top: 20px;
 	border: 1px solid #444;
+	color: #222;
 	/*background: #aaa;*/
-	z-index: 5;
+	z-index: 20;
 	padding: 10px;
 	cursor: move;
+	text-align: left;
 }
-	#wtp_infobox p	{
-		margin-bottom: 2px;
-		font-size: 0.8em;
-	}
+#wtp_infobox p	{
+	margin-bottom: 2px;
+	font-size: 0.8em;
+}
+#wtp_infobox .env-info span	{
+	display: inline-block;
+	margin-right: 16px;
+}
+#wtp_infobox.ui-draggable-dragging	{
+	border-style: dotted;
+	background-color: #ffffdd;
+	opacity: 0.85;
+	-webkit-transition: opacity 300ms ease-in-out;
+	-moz-transition: opacity 300ms ease-in-out;
+	-ms-transition: opacity 300ms ease-in-out;
+	-o-transition: opacity 300ms ease-in-out;
+	transition: opacity 300ms ease-in-out;
+}
 
-	.dev 		#wtp_infobox,
-	.local 		#wtp_infobox,
-	.testdevs	#wtp_infobox	{
-		display: block;
-	}
+.dev 		#wtp_infobox,
+.local 		#wtp_infobox,
+	/*.testdevs	#wtp_infobox,*/
+.beuser		#wtp_infobox	{
+	display: block;
+}
 
 
