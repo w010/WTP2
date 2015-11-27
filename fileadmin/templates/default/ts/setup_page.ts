@@ -87,7 +87,7 @@ page.includeCSSLibs {
 	bootstrap.media = all
 }
 page.includeCSS {
-	# reverse order when forceOnTop!
+	# reverse order when more forceOnTop!
 	layout = fileadmin/templates/default/css/layout.css
 	layout.media = all
 	layout.forceOnTop = 1
@@ -113,6 +113,7 @@ page.includeCSS {
 
 
 # force before standard typo's javascript
+# should be includeJSLibs probably!
 page.includeJSlibs	{
 	# modernizr have to be here. check for:
 	# "For best performance, you should have them follow after your stylesheet references." (doc)
@@ -158,6 +159,20 @@ temp.page.footerData {
 
 page.10 = USER
 page.10.userFunc = tx_templavoila_pi1->main_page
+
+
+
+
+# set in setup_lib
+#page.996 < lib.cookieMessage
+
+
+# WTP infobox
+page.1024 < lib.wtp_infobox
+
+
+
+
 
 
 

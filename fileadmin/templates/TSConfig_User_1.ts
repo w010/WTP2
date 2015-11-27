@@ -10,16 +10,27 @@ setup.default.thumbnailsByDefault = 1
 options.pageTree.showDomainNameWithTitle = 1
 options.pageTree.showNavTitle = 1
 options.pageTree.hideFilter = 0
+# set color for tree branch
+options.pageTree.backgroundColor.76 = rgba(0, 255, 0, 0.1)
+
 
 options.clearCache.system = 1
 options.clearCache.all = 1
 
 
 
+
+
 mod.web_list {
-   clickTitleMode = edit
-   alternateBgColors = 1
-   hideTables = static_template,static_currencies,static_taxes,static_markets,static_countries
+	clickTitleMode = edit
+	alternateBgColors = 1
+
+	# good version
+	table.static_template.hideTable = 1
+	table.static_currencies.hideTable = 1
+	table.static_taxes.hideTable = 1
+	table.static_markets.hideTable = 1
+	table.static_countries.hideTable = 1
 }
 
 # By default almost all new contents hidden

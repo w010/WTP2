@@ -116,6 +116,50 @@
 			<label index="error_email_email">Please enter valid data!</label>
 			<label index="error_message_required">Please enter valid data!</label>
 		</languageKey>
+		
+		<languageKey index="pl" type="array">
+            <label index="label_fieldset">Formularz kontaktowy</label>
+            <label index="name">Imię</label>
+            <label index="surname">Nazwisko</label>
+            <label index="title">Tytuł</label>
+            <label index="mr">Pan</label>
+            <label index="mrs">Pani</label>
+            <label index="street">Ulica</label>
+            <label index="number">Numer</label>
+            <label index="postcode">Kod pocztowy</label>
+            <label index="city">Miasto</label>
+            <label index="required">*wymagane</label>
+            <label index="phone">Telefon</label>
+            <label index="email">E-Mail</label>
+            <label index="country">Kraj</label>
+
+            <label index="company">Firma</label>
+            <label index="message">Wiadomość</label>
+            <label index="submit">Wyślij</label>
+            
+            <label index="greetings">Dear</label>
+            <label index="email_user_subject">Your contact request</label>
+            <label index="email_user_text">We have received your request via the contact form on www.example.org. We will process your request and get in contact with you soon.</label>
+            <label index="email_user_footer">---------------------------------- This message was created automatically. --------------------------------</label>
+
+            <label index="email_admin_subject">Contact request</label>
+            <label index="email_admin_text">Użytkownik wypełnił formularz kontaktowy na stronie www.example.org.</label>
+            <label index="email_admin_footer">---------------------------------- Wiadomość wygenerowana automatycznie. --------------------------------</label>
+
+            <label index="error_name_required">Wypełnij pole</label>
+            <label index="error_surname_required">Wypełnij pole</label>
+            <label index="error_company_required">Wypełnij pole</label>
+            <label index="error_street_required">Wypełnij pole</label>
+            <label index="error_number_required">Wypełnij pole</label>
+            <label index="error_postcode_required">Wypełnij pole</label>
+            <label index="error_city_required">Wypełnij pole</label>
+            <label index="error_country_required">Wypełnij pole</label>
+            <label index="error_email_required">Wypełnij pole</label>
+            <label index="error_email_email">Wypełnij pole</label>
+            <label index="error_message_required">Wypełnij pole</label>
+        </languageKey>
+        
+        
 		<languageKey index="de" type="array">
 			<label index="label_fieldset">Contact Form</label>
 			<label index="name">Name</label>

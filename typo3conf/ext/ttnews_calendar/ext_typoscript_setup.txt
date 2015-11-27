@@ -1,0 +1,24 @@
+	
+
+page_ttnewscalendar_month = PAGE
+page_ttnewscalendar_month	{
+	typeNum = {$page.tx_ttnewscalendar.page_ttnewscalendar_month}
+
+	10 =< plugin.tx_ttnewscalendar_pi1
+	10	{
+		templateFile = {$plugin.tx_ttnewscalendar_pi1.templateFile}
+		storePid = {$plugin.tx_ttnewscalendar_pi1.storePid}
+		newsListPid = {$plugin.tx_ttnewscalendar_pi1.newsListPid}
+		newsSinglePid = {$plugin.tx_ttnewscalendar_pi1.newsSinglePid}
+		target = {$plugin.tx_ttnewscalendar_pi1.target}
+		dowForm = {$plugin.tx_ttnewscalendar_pi1.dowForm}
+	}
+
+	config {
+		no_cache = 0
+		debug = 0
+		disableAllHeaderCode = 1
+		#additionalHeaders = Content-type:application/xml
+    	xhtml_cleaning = 0
+	}
+}

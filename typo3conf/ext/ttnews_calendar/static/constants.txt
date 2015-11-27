@@ -1,0 +1,22 @@
+plugin.tx_ttnewscalendar_pi1 {
+		# cat=plugin.ttnews_calendar//0; type=file[html,htm,tmpl,txt]; label = Template File
+	templateFile = EXT:ttnews_calendar/templates/default.html
+		# cat=plugin.ttnews_calendar//1; type=int; label = tt_news Store Page
+	storePid = 0
+		# cat=plugin.ttnews_calendar//2; type=int; label = tt_news LIST Page : Page ID where tt_news with code "LIST" is set
+	newsListPid = 0
+		# cat=plugin.ttnews_calendar//3; type=int; label = tt_news SINGLE Page : Page ID where tt_news with code "SINGLE" is set
+	newsSinglePid = 0
+		# cat=plugin.ttnews_calendar//4; type=string; label = Target of Links to tt_news Pages
+	target =
+		# cat=plugin.ttnews_calendar//5; type=options[full,3ltrs,2ltrs]; label = Day of week form : full - eg "Monday", 3ltrs - eg "Mon", 2ltrs - "Mo"
+	dowForm = 3ltrs
+		# cat=plugin.ttnews_calendar//7; type=int; label = tt_news category uid: show only items from this cat
+	newsCategory = 0
+		# cat=plugin.ttnews_calendar//6; type=bool; label = view two months at once
+	viewTwoMonths = 0
+	
+	linkDaysFilter = 0
+
+	joinCategoriesTable = 1
+}

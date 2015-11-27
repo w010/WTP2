@@ -1,0 +1,59 @@
+
+* UPEWNIÆ SIÊ, ¯E MAIN MENU JEST W TEMPLAVOILI ZMAPOWANE DO nav#menu-main bo w css siê zmieni³o
+
+* ZMIANY Z KASPERA I CORTILITY
+
+* TCEMAIN.clearCacheCmd w storage dla news
+
+* menu css z kaspera zrobic default jakis
+
+* content.css / colors - z barenjagera wziac nazwy klas, kolory hx i .content itd
+
+* csc-menu-1 - z lib content usunac wrap bo robi sie podwojnie
+	* który wrap i co siê robi podwójnie?
+
+* default ce dla flash / setup_tx.ts
+	(przy okazji jakiegoœ flasha)
+	(to ju¿ chyba jebaæ, flash nie ¿yje)
+
+	* uprawnienia beuserow
+		jesli cos zle dziala, sprobowac wlaczyc include access list dla content admin.
+
+
+* html tag zrobiæ na podstawie:
+<!doctype html >
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pl-PL" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
+
+<head>
+
+
+
+*** info instalacja:
+
+- sprawdzic, czy baza jest utf!!! collation utf8_general_ci
+
+- wrzuciæ src i dummy (bo pack nie ma temp, uploads itp)
+ln -s typo3_src-4.5.22/ typo3_src 
+ln -s typo3_src/t3lib
+ln -s typo3_src/typo3
+ln -s typo3_src/index.php
+mysql --batch --quick --host=1298.m.tld.pl --user=  --password=xx --database=baza1298_bahnhof --execute="SET NAMES 'utf8'; SET collation_connection = 'utf8_unicode_ci'; SET collation_database = 'utf8_unicode_ci'; SET collation_server = 'utf8_unicode_ci'; source wtpack_dump003.sql;"
+
+
+
+*** info po instalacji:
+
+- import exts z listy w typo3conf/ext/exts to import
+
+- nadpisaæ raz jeszcze localconf lub sprawdzic co nadpisane
+
+- zmieniæ config.baseURL !
+
+- lang segment realurl:
+	w autoconf np: valueMap";a:2:{i:1;s:2:"en";i:2;s:2:"es";}
+	lub wyjebac autoconf
+
+- jesli default inny jezyk niz polski, nalezy pozmieniac, a nie probowac ustawic na np. id 2

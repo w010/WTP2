@@ -14,9 +14,15 @@ options.pageTree.showNavTitle = 1
 options.pageTree.hideFilter = 0
 
 mod.web_list {
-   clickTitleMode = edit
-   alternateBgColors = 1
-   hideTables = static_template,static_currencies,static_taxes,static_markets
+	clickTitleMode = edit
+	alternateBgColors = 1
+
+	# good version
+	table.static_template.hideTable = 1
+	table.static_currencies.hideTable = 1
+	table.static_taxes.hideTable = 1
+	table.static_markets.hideTable = 1
+	table.static_countries.hideTable = 1
 }
 
 # By default almost all new contents hidden

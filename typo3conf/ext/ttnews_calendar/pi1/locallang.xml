@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_ttnewscalendar_pi1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="month.prev"><![CDATA[&laquo;]]></label>
+			<label index="month.next"><![CDATA[&raquo;]]></label>
+			<label index="month.1">January</label>
+			<label index="month.2">February</label>
+			<label index="month.3">March</label>
+			<label index="month.4">April</label>
+			<label index="month.5">May</label>
+			<label index="month.6">June</label>
+			<label index="month.7">July</label>
+			<label index="month.8">August</label>
+			<label index="month.9">September</label>
+			<label index="month.10">October</label>
+			<label index="month.11">November</label>
+			<label index="month.12">December</label>
+			<label index="dow.full.1">Monday</label>
+			<label index="dow.full.2">Tuesday</label>
+			<label index="dow.full.3">Wednesday</label>
+			<label index="dow.full.4">Thursday</label>
+			<label index="dow.full.5">Friday</label>
+			<label index="dow.full.6">Saturday</label>
+			<label index="dow.full.7">Sunday</label>
+			<label index="dow.3ltrs.1">Mon</label>
+			<label index="dow.3ltrs.2">Tue</label>
+			<label index="dow.3ltrs.3">Wed</label>
+			<label index="dow.3ltrs.4">Thu</label>
+			<label index="dow.3ltrs.5">Fri</label>
+			<label index="dow.3ltrs.6">Sat</label>
+			<label index="dow.3ltrs.7">Sun</label>
+			<label index="dow.2ltrs.1">Mo</label>
+			<label index="dow.2ltrs.2">Tu</label>
+			<label index="dow.2ltrs.3">We</label>
+			<label index="dow.2ltrs.4">Th</label>
+			<label index="dow.2ltrs.5">Fr</label>
+			<label index="dow.2ltrs.6">Sa</label>
+			<label index="dow.2ltrs.7">Su</label>
+		</languageKey>
+		<languageKey index="ru" type="array">
+			<label index="month.1">Январь</label>
+			<label index="month.2">Февраль</label>
+			<label index="month.3">Март</label>
+			<label index="month.4">Апрель</label>
+			<label index="month.5">Май</label>
+			<label index="month.6">Июнь</label>
+			<label index="month.7">Июль</label>
+			<label index="month.8">Август</label>
+			<label index="month.9">Сентябрь</label>
+			<label index="month.10">Октябрь</label>
+			<label index="month.11">Ноябрь</label>
+			<label index="month.12">Декабрь</label>
+			<label index="dow.full.1">Понедельник</label>
+			<label index="dow.full.2">Вторник</label>
+			<label index="dow.full.3">Среда</label>
+			<label index="dow.full.4">Четверг</label>
+			<label index="dow.full.5">Пятница</label>
+			<label index="dow.full.6">Суббота</label>
+			<label index="dow.full.7">Воскресенье</label>
+			<label index="dow.3ltrs.1">Пон</label>
+			<label index="dow.3ltrs.2">Вто</label>
+			<label index="dow.3ltrs.3">Сре</label>
+			<label index="dow.3ltrs.4">Чет</label>
+			<label index="dow.3ltrs.5">Пят</label>
+			<label index="dow.3ltrs.6">Суб</label>
+			<label index="dow.3ltrs.7">Вос</label>
+			<label index="dow.2ltrs.1">Пн</label>
+			<label index="dow.2ltrs.2">Вт</label>
+			<label index="dow.2ltrs.3">Ср</label>
+			<label index="dow.2ltrs.4">Чт</label>
+			<label index="dow.2ltrs.5">Пт</label>
+			<label index="dow.2ltrs.6">Сб</label>
+			<label index="dow.2ltrs.7">Вс</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="month.prev"><![CDATA[ <div class="arrow arrow-left"></div> ]]></label>
+			<label index="month.next"><![CDATA[ <div class="arrow arrow-right"></div> ]]></label>
+			<!--<label index="month.next"><![CDATA[ &raquo;]]></label>-->
+			<label index="month.1">Januar</label>
+			<label index="month.2">Februar</label>
+			<label index="month.3">März</label>
+			<label index="month.4">April</label>
+			<label index="month.5">Mai</label>
+			<label index="month.6">Juni</label>
+			<label index="month.7">Juli</label>
+			<label index="month.8">August</label>
+			<label index="month.9">September</label>
+			<label index="month.10">Oktober</label>
+			<label index="month.11">November</label>
+			<label index="month.12">Dezember</label>
+			<label index="dow.full.1">Monday</label>
+			<label index="dow.full.2">Tuesday</label>
+			<label index="dow.full.3">Wednesday</label>
+			<label index="dow.full.4">Thursday</label>
+			<label index="dow.full.5">Friday</label>
+			<label index="dow.full.6">Saturday</label>
+			<label index="dow.full.7">Sunday</label>
+			<label index="dow.3ltrs.1">Mon</label>
+			<label index="dow.3ltrs.2">Tue</label>
+			<label index="dow.3ltrs.3">Wed</label>
+			<label index="dow.3ltrs.4">Thu</label>
+			<label index="dow.3ltrs.5">Fri</label>
+			<label index="dow.3ltrs.6">Sat</label>
+			<label index="dow.3ltrs.7">Sun</label>
+			<label index="dow.2ltrs.1">Mo</label>
+			<label index="dow.2ltrs.2">Di</label>
+			<label index="dow.2ltrs.3">Mi</label>
+			<label index="dow.2ltrs.4">Do</label>
+			<label index="dow.2ltrs.5">Fr</label>
+			<label index="dow.2ltrs.6">Sa</label>
+			<label index="dow.2ltrs.7">So</label>
+		</languageKey>
+        <languageKey index="pl" type="array">
+            <label index="month.prev"><![CDATA[ <div class="arrow arrow-left"></div> ]]></label>
+            <label index="month.next"><![CDATA[ <div class="arrow arrow-right"></div> ]]></label>
+            <!--<label index="month.next"><![CDATA[ &raquo;]]></label>-->
+            <label index="month.1">Styczeń</label>
+            <label index="month.2">Luty</label>
+            <label index="month.3">Marzec</label>
+            <label index="month.4">Kwiecień</label>
+            <label index="month.5">Maj</label>
+            <label index="month.6">Czerwiec</label>
+            <label index="month.7">Lipiec</label>
+            <label index="month.8">Sierpień</label>
+            <label index="month.9">Wrzesień</label>
+            <label index="month.10">Październik</label>
+            <label index="month.11">Listopad</label>
+            <label index="month.12">Grudzień</label>
+            <label index="dow.full.1">Poniedziałek</label>
+            <label index="dow.full.2">Wtorek</label>
+            <label index="dow.full.3">Środa</label>
+            <label index="dow.full.4">Czwartek</label>
+            <label index="dow.full.5">Piątek</label>
+            <label index="dow.full.6">Sobota</label>
+            <label index="dow.full.7">Niedziela</label>
+            <label index="dow.3ltrs.1">Pon</label>
+            <label index="dow.3ltrs.2">Wto</label>
+            <label index="dow.3ltrs.3">Śro</label>
+            <label index="dow.3ltrs.4">Czw</label>
+            <label index="dow.3ltrs.5">Pią</label>
+            <label index="dow.3ltrs.6">Sob</label>
+            <label index="dow.3ltrs.7">Nie</label>
+            <label index="dow.2ltrs.1">Po</label>
+            <label index="dow.2ltrs.2">Wt</label>
+            <label index="dow.2ltrs.3">Śr</label>
+            <label index="dow.2ltrs.4">Cz</label>
+            <label index="dow.2ltrs.5">Pi</label>
+            <label index="dow.2ltrs.6">So</label>
+            <label index="dow.2ltrs.7">Ni</label>
+        </languageKey>
+	</data>
+</T3locallang>

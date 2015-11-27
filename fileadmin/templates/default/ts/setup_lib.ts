@@ -142,7 +142,7 @@ lib.page-foot {
 		10.value = <p class="pull-left"> wolo.pl TYPO3 pack <br> Preconfigured web system starter</p>
 
 		20 = TEXT
-		20.value = <p class="pull-right text-right"> {date:Y} - WTP 2.62.3<br>  <a href="http://wolo.pl">wolo.pl '.' studio</a> </p>
+		20.value = <p class="pull-right text-right"> {date:Y} - WTP 2.62.5<br>  <a href="http://wolo.pl">wolo.pl '.' studio</a> </p>
 		20.insertData = 1
 		
 		#20 < lib.CE
@@ -157,5 +157,63 @@ lib.page-foot {
 	#99.value = <br class="clear">
 }
 
+
+
+# todo: create CE and set source uid
+
+lib.cookieMessage = COA
+lib.cookieMessage   {
+	wrap = <div id="cookieMessage">|</div>
+	10 = TEXT
+	10.value = <button type="button" class="close pull-right" aria-hidden="true" onclick="$('#cookieMessage').hide();"><span>Close</span> ×</button>
+	20 < lib.CE
+	20.source = 580
+	30 = TEXT
+	30.value = <button type="button" class="cookie-agree" onclick="wtp.cookieAgree();">Agree</button>
+}
+
+
+
+
+
+
+
+
+# WTP INFOBOX v4.1
+# - keep in mind, that it disables cache on DEV
+
+lib.wtp_infobox = COA
+lib.wtp_infobox {
+	conf.version = 4.1
+	wrap = <div id="wtp_infobox" class="well well-sm" title="double click to toggle borders (DEV only)"> | </div>
+
+	# version display in markup
+	5 = TEXT
+	5.value < lib.wtp_infobox.conf.version
+	5.wrap = <!-- WTP infobox v| -->
+	# env info
+	10 = COA
+	10.wrap = <p class="env-info">|</p>
+	10.default = TEXT
+	10.default.wrap = <span>|</span>
+	10.default.value = <b class="text-danger">PUBLIC !!</b>
+	10.10 < lib.wtp_infobox.10.default
+}
+[globalVar= ENV:DEV=1]
+	lib.wtp_infobox.10.10 < lib.wtp_infobox.10.default
+	lib.wtp_infobox.10.10.value = DEV
+[end]
+[globalVar= ENV:LOCAL=1]
+	lib.wtp_infobox.10.11 < lib.wtp_infobox.10.default
+	lib.wtp_infobox.10.11.value = LOCAL
+[end]
+
+# Cache disabled for beuser
+[globalVar = TSFE:beUserLogin = 1]
+	config.no_cache = 1
+	page.bodyTagCObject.additionalClasses.beuser = beuser
+	lib.wtp_infobox.20 = TEXT
+	lib.wtp_infobox.20.value = <p>Cache disabled - BE user logged in</p>
+[end]
 
 

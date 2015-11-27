@@ -257,6 +257,7 @@ lib.l10n {
 		}
 	}
 
+	# this is used in macina_searchbox, it doesn't work other way
 	search	{
 		box_wrap_label = Wyszukiwarka
 		macinabox_headline = szukaj >
