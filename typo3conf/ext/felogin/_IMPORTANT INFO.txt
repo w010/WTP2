@@ -1,0 +1,6 @@
+this extension is a modified copy of default typo3/sysext/felogin from typo3 6.2.9
+
+excuse me for no git patch.
+
+look in code for "wolo mod"
+

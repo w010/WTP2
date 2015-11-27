@@ -1,0 +1,23 @@
+
+.wform .row			{ margin-bottom: 10px; }
+.wform .row .label	{ color: #000; }
+.wform .row-text .label	{ float: left; margin-top: 3px; }
+.wform .row-text .forminput	{ float: left; width: 162px; margin-left: 10px;}
+.wform .error			{ color: #f00; }
+.wform .required:after	{ content: "*";	}
+
+/* default for site */
+input[type="text"] {
+	display:block;
+	padding:0.2em;
+	width:100%;
+	border:1px solid #c5d2dd;
+	font-size:1em;
+}
+textarea {
+	display:block;
+	padding:0.2em;
+	width:100%;
+	border:1px solid #c5d2dd;
+	font-size:1em;
+}

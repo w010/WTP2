@@ -1,0 +1,63 @@
+
+2013-1-10 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.6
+	* ajax debug comments fixed now
+
+
+
+2012-10-16 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.5
+	* BCC support in sending emails
+	* Method to get WForm object from outside
+
+	
+
+2012-10-08 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.4
+	* New static method renderFormExternal to easy render form in extensions
+	* Js now is using own jquery alias instead of $
+	* Second pagetype for ajax added - one is Dave's method for CE-embedding, and new
+	  is for external rendering form / specified instance
+	
+	
+	
+2012-09-18 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.3
+	* Content elements markers
+	* Hooks defining by typoscript
+	* More form options can be custom ts configured (action, method...)
+	* Typo exceptions catched and displayed as result notice (is that good?)
+	* w_form_adds extension provided as snippet/helper for hooks
+
+
+
+
+2012-08-03 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.1
+	* Option to hide ajax sent form. todo: hide non-ajax
+
+
+
+2012-06-xx wolo  <wolo.wolski@gmail.com>
+
+	* v 0.2.0
+	* Many things. 0.1 is now deprecated.
+
+
+
+2012-05-28 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.1.1
+	* Fixed warning produced on initiating userfield object
+
+
+
+2012-04-4 wolo  <wolo.wolski@gmail.com>
+
+	* v 0.1.0
+	* First release of WForm2 lib integrated as extension

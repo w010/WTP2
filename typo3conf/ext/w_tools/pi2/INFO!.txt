@@ -1,0 +1,4 @@
+# TODO: must set this for all ajax instances!
+# uid of ce should be passed in ajax call!
+
+NOW IT JUST TAKES TS FROM PAGE AND DOESN'T RESPECT FLEXFORM SETTINGS!

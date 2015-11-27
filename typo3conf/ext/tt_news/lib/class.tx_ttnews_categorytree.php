@@ -40,7 +40,7 @@ require_once (t3lib_extMgm::extPath('tt_news') . 'lib/class.tx_ttnews_div.php');
  * extend class t3lib_treeview to change function wrapTitle().
  *
  */
-class tx_ttnews_categorytree extends t3lib_treeview {
+class tx_ttnews_categorytree extends \TYPO3\CMS\Backend\Tree\View\AbstractTreeView {
 
 	var $categoryCountCache = array();
 	var $cacheHit = false;
@@ -159,7 +159,8 @@ class tx_ttnews_categorytree extends t3lib_treeview {
 					if ($this->addSelfId) {
 						$this->ids[] = $uid;
 					}
-					$this->getTree($uid, 999, '', $rootRec['_SUBCSSCLASS']);
+					// wolo call update
+					$this->getTree($uid, 999, '', '', $rootRec['_SUBCSSCLASS']);
 				}
 				// Add tree:
 				$treeArr = array_merge($treeArr, $this->tree);
@@ -231,7 +232,7 @@ class tx_ttnews_categorytree extends t3lib_treeview {
 	 * @param	[type]		$subCSSclass: ...
 	 * @return	integer		The count of items on the level
 	 */
-	function getTree($uid, $depth = 999, $blankLineCode = '', $subCSSclass = '') {
+	function getTree($uid, $depth = 999, $depthData = '', $blankLineCode = '', $subCSSclass = '') {
 
 		//		echo $this->tmpC++."\n";
 
@@ -284,7 +285,8 @@ class tx_ttnews_categorytree extends t3lib_treeview {
 
 			// Make a recursive call to the next level
 			if ($depth > 1 && $this->expandNext($newID)) {
-				$nextCount = $this->getTree($newID, $depth - 1, $blankLineCode . ',' . $LN, $row['_SUBCSSCLASS']);
+				// wolo call update
+				$nextCount = $this->getTree($newID, $depth - 1, '', $blankLineCode . ',' . $LN, $row['_SUBCSSCLASS']);
 				if (count($this->buffer_idH)) {
 					$idH[$row['uid']]['subrow'] = $this->buffer_idH;
 				}

@@ -144,7 +144,7 @@ class tx_ttnews_FEtreeview extends tx_ttnews_categorytree {
 	 * @param	array		$v: an array with uid and title of the current item.
 	 * @return	string		the wrapped title
 	 */
-	function wrapTitle($title,$v)	{
+	function wrapTitle($title,$v,$bank = 0)	{
 
 
 

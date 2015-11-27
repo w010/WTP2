@@ -27,7 +27,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
- * Pibase extended v4
+ * Pibase extended v5
  *
  * @author	wolo.pl <wolo.wolski@gmail.com>
  * @package	TYPO3
@@ -46,6 +46,7 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 		$this->pi_loadLL();
 		$this->pi_initPIflexForm();
 
+		// keep this reference, feuser can be updated with helper fields
 		$this->feUser = &$this->getFeuser();
 
 		// plugin initialize
@@ -117,8 +118,9 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	/**
 	 * @return array
 	 */
-	public function getFeuser() {
-        return $GLOBALS['TSFE']->fe_user->user;
+	public function &getFeuser() {
+		$feuser = &$GLOBALS['TSFE']->fe_user->user;
+        return $feuser;
     }
 
 

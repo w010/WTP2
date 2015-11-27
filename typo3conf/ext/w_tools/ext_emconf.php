@@ -11,8 +11,8 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Wolo.pl - tools for extensions and other stuff',
-	'description' => 'Tools by wolo.pl',
+	'title' => 'Wolo.pl - toolkit / WTP',
+	'description' => 'Extensions tools and other useful stuff by wolo.pl. (Actually, it should been named "wtp") ',
 	'category' => 'fe',
 	'author' => 'wolo.pl',
 	'author_email' => 'wolo.wolski@gmail.com',
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.5',
+	'version' => '2.0.7',
 	'constraints' => array(
 		'depends' => array(
 		),

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_wform_pi1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="label_field_name">Name: [default default]</label>
+			<label index="label_field_message">Message:</label>
+			<label index="label_field_email">Email:</label>
+			<label index="label_field_phone">Phone:</label>
+			<label index="label_field_captcha">Captcha:</label>
+			<label index="label_field_submit">Submit</label>
+			<label index="info_field_captcha">Type above the text from image:</label>
+			<label index="msg_formSend">Form was successfuly sent</label>
+			<label index="msg_formSendError">Error sending form</label>
+			<label index="msg_field_email_required">Email is required</label>
+			<label index="msg_field_email_valid">Email is not valid!</label>
+			<label index="msg_field_message_required">Message is required</label>
+			<label index="msg_field_name_required">Name is required</label>
+			<label index="msg_field_name_lengthMax">Name is too long!</label>
+			<label index="msg_field_captcha_required">Captcha is required</label>
+			<label index="msg_field_captcha_valid">Captcha is invalid!</label>
+		</languageKey>
+		<languageKey index="en" type="array">
+			<label index="label_field_name">Name: [en default]</label>
+			<label index="label_field_message">Message:</label>
+			<label index="label_field_email">Email:</label>
+			<label index="label_field_phone">Phone:</label>
+			<label index="label_field_captcha">Captcha:</label>
+			<label index="label_field_submit">Submit</label>
+			<label index="info_field_captcha">Type above the text from image:</label>
+			<label index="msg_formSend">Form was successfuly sent</label>
+			<label index="msg_formSendError">Error sending form</label>
+			<label index="msg_field_email_required">Email is required</label>
+			<label index="msg_field_email_valid">Email is not valid!</label>
+			<label index="msg_field_message_required">Message is required</label>
+			<label index="msg_field_name_required">Name is required</label>
+			<label index="msg_field_name_lengthMax">Name is too long!</label>
+			<label index="msg_field_captcha_required">Captcha is required</label>
+			<label index="msg_field_captcha_valid">Captcha is invalid!</label>
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+	</orig_hash>
+	<orig_text type="array">
+	</orig_text>
+</T3locallang>

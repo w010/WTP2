@@ -1,0 +1,76 @@
+plugin.tx_wform_pi1 {
+	# default template
+	templateFile = EXT:w_form/res/template-form.html
+
+	saveToDb = 1
+	recordStoragePid = 0
+
+	sendEmailAdmin = 1
+	mail	{
+		recipients = wolo.wolski@gmail.com
+		subject = Email from WForm2 form extension
+		from = info@example.com
+		fromName = Your company
+		reply-to = info@example.com
+	}
+
+	redirect	{
+		#after_success = 6
+	}
+	
+	disableAjax = 0
+	AjaxTypeNum = {$page.w_form.typenum}
+	AjaxTypeNum_spec = {$page.w_form.typenum_spec}
+	
+	noDefaultCss = 0
+	errorClass = error
+	
+	#includeJqFormInPlugin = /typo3conf/ext/w_form/res/jquery.form.js
+	includeJqFormInPlugin = http://malsup.github.com/jquery.form.js
+}
+
+
+
+# type for plugin embeded as ce
+
+wformajax = PAGE
+wformajax	{
+	typeNum = {$page.w_form.typenum}
+
+	10 = RECORDS
+	10.tables = tt_content
+	10.source = {GPvar:uid}
+	10.source.insertData = 1
+	
+	config {
+		no_cache = 1
+		debug = 0
+		disableAllHeaderCode = 1
+		#additionalHeaders = Content-type:application/xml
+    	xhtml_cleaning = 0
+	}
+}
+
+
+# type for plugin called external / specified instance
+
+wformajax_spec = PAGE
+wformajax_spec	{
+	typeNum = {$page.w_form.typenum_spec}
+
+	10 =< plugin.tx_wform_pi1
+	10.mode = ajax
+
+	config {
+		no_cache = 1
+		debug = 0
+		disableAllHeaderCode = 1
+		#additionalHeaders = Content-type:application/xml
+    	xhtml_cleaning = 0
+	}
+}
+
+
+page.includeJSlibs {
+    # form = EXT:w_form/res/jquery.form.js
+}

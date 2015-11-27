@@ -1,0 +1,56 @@
+
+v2.1.3
+9.10.2014
+
+- name and type are not required anymore when defining field. default are: type=text, name=[DATA][{idname}]
+  now is enough to use ->addField([
+				'idname' => 'title',
+				'value' => $valueArray['title'] ])
+- type:user conf & initialization changed
+- example updated, working base added
+
+
+
+v2.1.2
+
+4.04.2012
+
+- bugfixes and cleaning, some defaults set
+- own exceptions
+- better integration in w_form typo3 ext
+- user field and validator works better
+
+
+
+v2.1.1
+
+8.09.2011
+
+- field type Select now supports "multiple"
+- added integer and number validator aliases for digit
+
+
+
+v2.1.0
+
+23.05.2011
+
+- support for html5 field types and validators
+
+
+
+v2.0.3
+
+04.05.2011
+
+- new field type "multicheck"
+- fixed reference / exception error
+
+
+
+v2.0.2
+
+27.01.2011
+
+- new field type "user"
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_wsubsbox_pi1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="label_subscribe">Zapisz się do newslettera</label>
+			<label index="notify_success">Adres został dodany</label>
+			<label index="notify_error">Nie udało sie zapisać</label>
+			<label index="notify_error_invalid">Invalid address</label>
+			<label index="notify_error_exists">Adress already exists</label>
+			<label index="submit_button_label">&gt;</label>
+		</languageKey>
+		<languageKey index="en" type="array">
+			<label index="label_subscribe">[en] Zapisz się do newslettera</label>
+			<label index="notify_success">[en] Adres został dodany</label>
+			<label index="notify_error">Nie udało sie zapisać</label>
+			<label index="notify_error_invalid">Invalid address</label>
+			<label index="notify_error_exists">Adress already exists</label>
+			<label index="submit_button_label">&gt;</label>
+		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="label_subscribe">Zapisz się do newslettera</label>
+			<label index="notify_success">Adres został dodany</label>
+			<label index="notify_error">Nie udało sie zapisać</label>
+			<label index="notify_error_invalid">Nieprawidłowy adres</label>
+			<label index="notify_error_exists">Adres już istnieje</label>
+			<label index="submit_button_label">&gt;</label>
+		</languageKey>
+		<languageKey index="es" type="array">
+			<label index="label_subscribe">[es] Zapisz się do newslettera</label>
+			<label index="notify_success">[es] Adres został dodany</label>
+			<label index="notify_error">Nie udało sie zapisać</label>
+			<label index="notify_error_invalid">Nieprawidłowy adres</label>
+			<label index="notify_error_exists">Adres już istnieje</label>
+			<label index="submit_button_label">&gt;</label>
+		</languageKey>
+	</data>
+</T3locallang>

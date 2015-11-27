@@ -1,0 +1,77 @@
+<div class="wform-form">
+
+	<div id="form-header" class="csc-header csc-header-n1">
+		<h1 class="csc-firstHeader">Wypełnij formularz</h1>
+		<div class="result" id="result">
+			<!-- ###SUB_RESULT### -->
+			<p class="error">###RESULT###</p>
+			<!-- ###SUB_RESULT### -->
+		</div>
+	</div>
+	
+	<div id="form-body">
+		###FORM_OPENTAG###
+		
+		
+		
+			<div class="row###ERROR_EMAIL###">
+				<span class="label">adres e-mail<span class="required"></span></span>
+				<span class="forminput">###INPUT_EMAIL###</span>
+				<br class="clear" />
+			</div>
+			<div class="row###ERROR_PHONE###">
+				<span class="label">numer telefonu<span class="required"></span></span>
+				<span class="forminput">###INPUT_PHONE###</span>
+				<br class="clear" />
+			</div>
+			<div class="row###ERROR_DATE###">
+				<span class="label">###LABEL_DATE### <span class="required"></span></span>
+				<span class="forminput">###INPUT_DATE### ###DATE2CAL###</span>
+				<br class="clear" />
+			</div>
+
+			
+			
+			<!--###CAPTCHA_INSERT###-->
+			<div class="row captcha-image">
+				<span class="label">&nbsp;</span>
+				<span class="forminput">
+					###SR_FREECAP_IMAGE###
+				</span>
+			</div>
+			<div class="row align-right">###SR_FREECAP_CANT_READ###</div>
+			<div class="row row-captcha###ERROR_CAPTCHA###">
+				<span class="label">wprowadź tekst z obrazka<span class="required"></span></span>
+				<span class="forminput">
+					<input class="input-text" id="input_captcha_response" name="###EXT_PREFIX###[captcha_response]" title="###SR_FREECAP_NOTICE###" value="" />
+				</span>
+				<br class="clear" />
+			</div>
+			<!--###CAPTCHA_INSERT###-->
+			
+			
+			<div class="agree###ERROR_AGREE###">
+				<div class="toleft checkbox">
+					###INPUT_AGREE###
+				</div>
+				<div class="toleft info">
+					<p class="small-text light-text"> <label for="input-agree">
+					Akceptuję warunki wysyłki prezentu.
+					</label></p>
+				</div>
+				<br class="clear" />
+			</div>
+			
+			
+			<div class="submit align-right">
+				<input id="button-send" name="###EXT_PREFIX###[submit]" type="submit" class="send" value="" onclick="document.getElementById('hidden-send').value=1;  secondTracker._trackEvent('landing-sprzedaz-formularz-full', 'wyslij-click');" onmousedown="buttonRollOver(this);" onmouseup="buttonRollOut(this);" onmouseout="buttonRollOut(this);" />
+				<input id="hidden-send" name="###EXT_PREFIX###[send]" type="hidden" value="" />
+			</div>
+			
+			
+			
+			###CHECK_NOVALIDATION###
+			
+		</form>
+	</div>
+</div>

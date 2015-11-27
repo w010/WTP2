@@ -1,5 +1,19 @@
-plugin.tx_wtools_pi1 {
 
+#
+# main setup custom options for WTP2
+# (copy to fileadmin/templates)
+#
+
+plugin.tx_wtools {
+	# fe_users table's column with avatar, mostly to display it in top menu (@see menu IProcFunc)
+	avatarField = image
+
+	avatarTopMenu	{
+		width = 20m
+		height = 20m
+
+		class = img-rounded
+	}
 }
 
 

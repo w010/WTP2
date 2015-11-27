@@ -1,0 +1,9 @@
+plugin.tx_wform_pi1 {
+	
+}
+
+
+# cat=form; type=int; label=Page TypeNum for WForm2 ajax data - CE mode
+page.w_form.typenum = 783
+# cat=form; type=int; label=Page TypeNum for WForm2 ajax data - specified instance mode
+page.w_form.typenum_spec = 784

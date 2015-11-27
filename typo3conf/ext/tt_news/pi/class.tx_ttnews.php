@@ -786,7 +786,6 @@ class tx_ttnews extends tslib_pibase {
 						if ($this->conf['usePiBasePagebrowser'] && $this->isRenderMarker('###BROWSE_LINKS###')) {
 
 							$markerArray = $this->getPagebrowserContent($markerArray, $pbConf, $this->pointerName);
-
 						} else {
 							$markerArray['###BROWSE_LINKS###'] = $this->makePageBrowser($pbConf['showResultCount'], $pbConf['tableParams'], $this->pointerName);
 						}
@@ -885,7 +884,9 @@ class tx_ttnews extends tslib_pibase {
 			// if there is a GETvar in the URL that is not in this list, caching will be disabled for the pagebrowser links
 
 
-			$this->pi_isOnlyFields = $pointerName . ',tt_news,year,month,day,pS,pL,arc,cat';
+			//$this->pi_isOnlyFields = $pointerName . ',tt_news,year,month,day,pS,pL,arc,cat';
+			// wolo mod - allow caching on tag_list
+			$this->pi_isOnlyFields = $pointerName . ',tt_news,year,month,day,pS,pL,arc,cat,tag';
 
 			// pi_lowerThan limits the amount of cached pageversions for the list view. Caching will be disabled if one of the vars in $this->pi_isOnlyFields has a value greater than $this->pi_lowerThan
 			// 							$this->pi_lowerThan = ceil($this->internal['res_count']/$this->internal['results_at_a_time']);

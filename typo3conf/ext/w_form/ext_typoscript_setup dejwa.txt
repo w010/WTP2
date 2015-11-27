@@ -1,0 +1,69 @@
+plugin.tx_wform_pi1 {
+	# default template
+	templateFile = EXT:w_form/res/template-form.html
+
+	saveToDb = 1
+	recordStoragePid = 0
+
+	sendEmailAdmin = 1
+	mail	{
+		recipients = email@example.com
+		subject = Email from WForm2 form extension
+		from = Your company <info@example.com>
+		fromName = Your company
+		reply-to = info@example.com
+	}
+
+	redirect	{
+		#after_success = 6
+	}
+	
+	disableAjax = 0
+	AjaxTypeNum = {$page.w_form.typenum}
+
+	noDefaultCss = 0
+	
+	#includeJqFormInPlugin = /typo3conf/ext/w_form/res/jquery.form.js
+	includeJqFormInPlugin = http://malsup.github.com/jquery.form.js
+}
+
+
+
+wformajax = PAGE
+wformajax	{
+	typeNum = {$page.w_form.typenum}
+
+	10 = RECORDS
+	10.tables = tt_content
+	10.source.data = GP:uid
+
+	config {
+		no_cache = 1
+    	xhtml_cleaning = 1
+        disableCharsetHeader = 1
+        disablePrefixComment = 1
+        disableAllHeaderCode = 1
+        additionalHeaders = Cache-Control: no-cache, must-revalidate, max-age=0|Expires: Mon, 2 Jan 2006 01:00:00 GMT|Pragma: no-cache
+        xhtml_cleaning = 0
+        incT3Lib_htmlmail = 1
+        debug = 0
+	}
+}
+
+[globalVar = TSFE:type = 783] 
+tt_content.stdWrap.innerWrap.cObject {
+    default {
+        #10 >
+        #15 >
+        #20 >
+        #30.value = |
+    }
+    66 {
+        10 >
+    }
+}
+[global]
+
+page.includeJSlibs {
+    # form = EXT:w_form/res/jquery.form.js
+}
