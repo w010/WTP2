@@ -1,0 +1,5 @@
+plugin.tx_wgmaps {
+	startPointUid = 1
+	templateFile = EXT:w_gmaps/res/template.html
+	apiKey = AIzaSyBESugQEAaY4h9jY0Q0BqIEcCzLhqMlia8
+}

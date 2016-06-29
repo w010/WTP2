@@ -1,0 +1,14 @@
+config.tx_extbase{
+    persistence{
+        classes{
+
+            Tx_WSlider_Domain_Model_ContentElement {
+                mapping {
+                    tableName = tt_content
+                    recordType = Tx_WSlider_ContentElement
+                }
+            }
+            
+    	}
+    }
+}

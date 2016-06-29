@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'w_gmaps'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_wgmaps_points">Points</label>
+			<label index="tx_wgmaps_points.title">Title</label>
+			<label index="tx_wgmaps_points.description">Description</label>
+			<label index="tx_wgmaps_points.coords">Map coords</label>
+			<label index="tt_content.list_type_pi1">Map directions</label>
+		</languageKey>
+	</data>
+</T3locallang>

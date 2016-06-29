@@ -1,5 +1,7 @@
 <?php
 
+// 0.9 on DB! compare, update
+
 // WTP DUMP/BACKUP TOOL - wolo.pl '.' studio
 // v0.8
 // 2015

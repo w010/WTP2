@@ -1,0 +1,21 @@
+
+# EXAMPLES
+
+plugin.tx_wform_pi1 {
+	hook	{
+		#email_beforeSend	{
+			# key is extension name or anything. just for information. same way as normal typo hooks.
+			# w_form_adds = user_wform_hooks
+		#}
+	}
+
+
+	# example:
+	# set hook for specified instance
+
+	#specifiedConf.splash1 {
+		# hook.email_beforeSend.w_form_adds = user_wform_hooks
+	#}
+
+}
+

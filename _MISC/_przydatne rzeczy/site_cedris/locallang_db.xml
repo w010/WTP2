@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'site_cedris'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_news.tx_sitecedris_background">Background / dossiers / news</label>
+			<label index="tt_news.tx_sitecedris_background_links">Background links</label>
+			<label index="tt_news.tx_sitecedris_author">Blog author</label>
+			<label index="tt_news.tx_sitecedris_sw_arbeidsmarktregio">Arbeidsmarkt regio</label>
+			<label index="tt_news.tx_sitecedris_sw_bedrijven">SW-bedrijven</label>
+			<label index="tt_news.tx_sitecedris_praktik_function">Functie</label>
+			<label index="tt_news.tx_sitecedris_praktik_phone">Phone</label>
+			<label index="tt_news.tx_sitecedris_praktik_email">Email</label>
+
+            <!-- fields after changes - logo and title not from linked record -->
+            <label index="tt_news.tx_sitecedris_praktik_title">Titles</label>
+            <label index="tt_news.tx_sitecedris_praktik_logo">Logos</label>
+
+            <label index="be_users.tx_sitecedris_image">Image</label>
+
+            <label index="tx_sitecedris_swregio">Arbeidsmarkt regio</label>
+            <label index="tx_sitecedris_swregio.description">Description</label>
+            <label index="tx_sitecedris_swregio.url">Link url</label>
+
+            <label index="tx_sitecedris_bglink">Background link</label>
+            <label index="tx_sitecedris_bglink.label">Label (optional)</label>
+            <label index="tx_sitecedris_bglink.link">Link</label>
+
+
+            <!-- fields from xls imported -->
+            <label index="fe_users.tx_sitecedris_sw_postadres">Postadres</label>
+			<label index="fe_users.tx_sitecedris_sw_cole">Column E</label>
+
+            <!-- fields from layout searchform -->
+			<label index="fe_users.tx_sitecedris_sw_provincie">Provincie</label>
+			<label index="fe_users.tx_sitecedris_sw_arbeidsmarktregio">Arbeidsmarkt regio</label>
+			<label index="fe_users.tx_sitecedris_sw_citysecond">Second city for search</label>
+		</languageKey>
+        <languageKey index="nl" type="array">
+            <label index="tt_news.tx_sitecedris_background">Achtegrond / dossiers / nieus</label>
+            <label index="tt_news.tx_sitecedris_background_links">Achtegrond links</label>
+
+            <label index="tx_sitecedris_swregio.description">Beschrijving</label>
+        </languageKey>
+	</data>
+</T3locallang>

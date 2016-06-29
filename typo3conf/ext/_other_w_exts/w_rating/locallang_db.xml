@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'w_rating'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_wrating_vote">Rating vote</label>
+			<label index="tx_wrating_vote.table_de16108197">Table</label>
+			<label index="tx_wrating_vote.record_uid">Record uid</label>
+			<label index="tx_wrating_vote.note">Note</label>
+			<label index="tx_wrating_vote.userdata">User data</label>
+			<label index="tt_content.list_type_pi1">Voting</label>
+		</languageKey>
+		<languageKey index="pl" type="array">
+			<label index="tx_wrating_vote">Rating głos</label>
+			<label index="tx_wrating_vote.table_de16108197">Tabela</label>
+			<label index="tx_wrating_vote.record_uid">Uid rekordu</label>
+			<label index="tx_wrating_vote.note">Ocena</label>
+			<label index="tx_wrating_vote.userdata">Dane użytkownika</label>
+			<label index="tt_content.list_type_pi1">Głosowanie</label>
+		</languageKey>
+	</data>
+</T3locallang>

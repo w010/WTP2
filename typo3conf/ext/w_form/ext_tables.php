@@ -2,8 +2,8 @@
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
-/*
-$TCA['tx_wform_forms'] = array (
+// czemu to jest wykomentowane?
+/*$TCA['tx_wform_forms'] = array (
 	'ctrl' => array (
 		'title'     => 'LLL:EXT:w_form/locallang_db.xml:tx_wform_forms',
 		'label'     => 'uid',
@@ -23,7 +23,7 @@ $TCA['tx_wform_forms'] = array (
 );
 */
 
-t3lib_div::loadTCA('tt_content');
+//t3lib_div::loadTCA('tt_content');
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1']='layout,select_key';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1'] = 'pi_flexform';
 

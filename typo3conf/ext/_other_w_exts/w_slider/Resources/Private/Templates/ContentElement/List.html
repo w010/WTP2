@@ -1,0 +1,74 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+<f:flashMessages />
+
+<ul class="tx_wslider">
+	<f:for each="{contentElements}" as="contentElement" key="index">
+		<li class="item-{index}">
+			<f:cObject typoscriptObjectPath="lib.CE_fluid" data="{contentElement}" />
+		</li>
+	</f:for>
+</ul>
+
+<script>
+
+var setCarouselDimensions = function()	{
+	//jQuery(".tx-w-slider .mask").css('width', jQuery(window).width());
+}
+var initCarousel = function()	{
+	  jQuery(".tx-w-slider").carousel({
+	    itemsPerPage: 1,
+	    itemsPerTransition: 1, // number of items moved with each transition
+	    noOfRows: 1,
+	    nextPrevLinks: true,
+	    pagination: false,
+	    speed: 'fast',
+	    easing: 'swing', // supports the jQuery easing plugin
+	    nextText: '',
+	    prevText: ''
+	  });
+	  setCarouselDimensions();
+}
+
+//$(window).bind('resize', function($) { setCarouselDimensions(); });
+
+jQuery(document).ready(function($) {
+	
+  initCarousel($);
+	  
+  $(window).bind('ready', function() {flowCarouselNextPrevButtons($); });
+  $(window).bind('resize', function() {flowCarouselNextPrevButtons($); });
+});
+
+// make nav buttons visible, when carousel is bigger than viewport. move them to the center by offset
+var flowCarouselNextPrevButtons = function($)	{
+	var carouselMaskWidth = 1920;
+	var windowWidth = $(window).width();
+	var offset = (carouselMaskWidth - windowWidth) / 2;
+	if (windowWidth < 992)	{
+		offset = 431;
+		$('.tx-w-slider .prev').css('left', offset+'px');
+		$('.tx-w-slider .next').css('right', offset+'px');
+	}
+	else if (carouselMaskWidth > windowWidth)	{
+		$('.tx-w-slider .prev').css('left', offset+'px');
+		$('.tx-w-slider .next').css('right', offset+'px');
+	}
+	
+};
+</script>
+
+</f:section>

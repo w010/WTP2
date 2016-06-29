@@ -4,9 +4,9 @@ if (!defined ('TYPO3_MODE')) {
 }
 
 /**
- * WTP2 v2.62.5 - sprint - unchecked - (test after running, something might need to be fixed or removed)
+ * WTP2 v2.62.6 - sprint - unchecked - (test after running, something might need to be fixed or removed)
  * Wolo.pl TYPO3 Pack
- * 2015-11
+ * 2016-06
  * wolo.pl '.' studio
  *
  * (version convention explain: vA.B.C means: A=2 because WTP2,  B=nn is like T3-branch n.n,  C is WTP version itself.)

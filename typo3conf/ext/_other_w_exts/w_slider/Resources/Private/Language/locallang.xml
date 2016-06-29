@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the jQuery Carrousel / Slider Content Elements extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_wslider_domain_model_contentelement">ContentElement</label>
+		</languageKey>
+	</data>
+</T3locallang>

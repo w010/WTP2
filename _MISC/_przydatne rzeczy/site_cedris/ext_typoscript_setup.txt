@@ -1,0 +1,8 @@
+#page.includeLibs.tx_sitecedris_misc = EXT:site_cedris/class.tx_sitecedris_misc.php
+
+
+
+#plugin.tx_sitecedris_pi1    {
+#	
+#}
+

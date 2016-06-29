@@ -1,0 +1,73 @@
+
+<!-- ###TEMPLATE_DIRECTIONS### -->
+<div class="mapdirections">
+	<!-- ###SUB_MAP### -->
+	<div class="header-inner">
+		<div id="wmap-map">###MAP###</div>
+		<div class="header-over"></div>
+	</div>
+	<!-- ###SUB_MAP### -->
+
+	<div class="wmap-form content-inner" id="###FORM_ID###_container">
+		<div class="wmap-form-inner">
+
+			<div class="result" id="wmap-result">
+				<!-- ###SUB_RESULT### -->
+				<p class="notice">###RESULT###</p>
+				<!-- ###SUB_RESULT### -->
+			</div>
+
+			<!-- ###SUB_FORM### -->
+			<form id="directions-choose" method="get" action="###URL_FORM_ACTION###">
+				<div class="form-body">
+					<p>###FORM_HEAD###</p>
+					<div class="pointsel dropstyle"><select name="###EXT_PREFIX###[point]" class="input_point"> ###POINTS_OPTIONS### </select></div>
+					<input name="###EXT_PREFIX###[point_name]" type="text" value="###VAL_POINT_NAME###" class="text input_point_name">
+
+					<div id="submit" class="submit morebutton disabled">
+						<input id="###FORM_ID###_button-send" name="###EXT_PREFIX###[###FORM_ID###_submit]" type="submit" class="submit send" value="###LABEL_SUBMIT###" disabled="disabled">
+						<input id="###FORM_ID###_hidden-send" name="###EXT_PREFIX###[send]" type="hidden" value="1">
+
+						<input name="no_cache" type="hidden" value="1">
+					</div>
+					<br class="clear">
+				</div>
+			</form>
+			<!-- ###SUB_FORM### -->
+
+			<!-- ###SUB_ROUTE### -->
+			<div class="route togglist-item act">
+				<div class="from">
+					<img src="/fileadmin/templates/default/images/route-A.png" alt="A">
+					<p>###POINT_A_NAME###</p>
+					<div class="clear"></div>
+				</div>
+				<div class="toggler-box">
+			  		<div class="toggler">###TOGGLER_TEXT###</div>
+				</div>
+
+				<div class="steps togglable">
+					<p class="info">###INFO###</p>
+					<!-- ###SUB_STEP### -->
+					<div class="step###STEP_CLASS###">
+						<div class="number">###NUMBER###</div>
+						<div class="icon">###ICON###</div>
+						<div class="instructions">###INSTRUCTIONS###</div>
+						<div class="length">###LENGTH###</div>
+						<br class="clear">
+					</div>
+					<!-- ###SUB_STEP### -->
+				</div>
+
+				<div class="to">
+					<img src="/fileadmin/templates/default/images/route-B.png" alt="B">
+					<p>###POINT_B_NAME###</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<!-- ###SUB_ROUTE### -->
+		</div>
+	</div>
+</div>
+<!-- ###TEMPLATE_DIRECTIONS### -->
+

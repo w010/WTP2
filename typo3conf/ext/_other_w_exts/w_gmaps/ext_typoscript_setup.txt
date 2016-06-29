@@ -1,0 +1,11 @@
+plugin.tx_wgmaps_pi1 {
+	# default template
+	templateFile = {$plugin.tx_wgmaps.templateFile}
+
+	startPointUid = {$plugin.tx_wgmaps.startPointUid}
+
+	noDefaultCss = 1
+
+	apiKey = {$plugin.tx_wgmaps.apiKey}
+}
+

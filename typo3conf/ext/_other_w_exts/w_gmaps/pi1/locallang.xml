@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin &quot;tx_wgmaps_pi1&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="approx">approximately</label>
+			<label index="toggle">Schliessen</label>
+			<label index="error_no_startpoint">Starting point not found</label>
+			<label index="error_no_endpoint">Destination point not found</label>
+			<label index="error_communication">Cannot communicate with maps server</label>
+			<label index="label_field_submit">Route anzeigen</label>
+			<label index="label_form_head">Sehenswürdigkeiten Routenplaner</label>
+
+		</languageKey>
+	</data>
+</T3locallang>

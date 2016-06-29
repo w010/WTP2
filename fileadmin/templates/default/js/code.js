@@ -201,15 +201,24 @@ if (!wtp) var wtp = {
 
 
 	/**
-     * WTP INFOBOX v4.3
+     * WTP INFOBOX v4.31
      * - on update check below widths for rwdinfo!
      */
     initWTPinfobox: function()  {
 
 		var WTP_infobox = $("#wtp_infobox");
 		
+			// project specific - hide header if need to see something under
+			if (wtp.DEV) {
+				//console.info(wtp.DEV, 'DEV');
+				$("#page-head").dblclick(function () {
+					//$('#page-head').css('visibility', 'hidden');
+					this.css('visibility', 'hidden');
+				});
+			}
 		
         WTP_infobox.draggable();
+        WTP_infobox.resizable();
 
         // restore posision
         var position = [600, 20];
@@ -268,7 +277,7 @@ if (!wtp) var wtp = {
                 else if (width >= 992)		widthClass = 'md';
                 else if (width >= 768)		widthClass = 'sm';
                 else if (width >= 480)		widthClass = 'xs';
-                else if (width < 480)       widthClass = 'Ys';
+                else if (width < 480)		widthClass = 'Ys';
 
                 var notice = 'Width: <b>' + width + '</b>, Class: <b>' +widthClass+ '</b>';
 
@@ -278,7 +287,7 @@ if (!wtp) var wtp = {
             $( window ).load( insertRWDinfo );
             $( window ).resize( insertRWDinfo );
         }
-    },
+	},
     
     // checked - from db. todo: check ts & css / create ce
     /*cookieAgree: function(el) {

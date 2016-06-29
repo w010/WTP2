@@ -1,0 +1,14 @@
+plugin.tx_wslider {
+	view {
+		# cat=plugin.tx_wslider/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:w_slider/Resources/Private/Templates/
+		# cat=plugin.tx_wslider/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:w_slider/Resources/Private/Partials/
+		# cat=plugin.tx_wslider/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:w_slider/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_wslider//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

@@ -1,0 +1,10 @@
+
+2012-06-16 wolo.pl  <wolo.wolski@gmail.com>
+
+	* fix for conflicting html ids in some cases when using from other extensions (same cobj->uid)
+
+
+
+2012-06-15 wolo.pl  <wolo.wolski@gmail.com>
+
+	* initial

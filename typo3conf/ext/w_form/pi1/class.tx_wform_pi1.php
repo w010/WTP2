@@ -24,7 +24,7 @@
 
 
 //require_once(PATH_tslib.'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('w_tools').'class.tx_wtools_pibase.php');
+//require_once(t3lib_extMgm::extPath('w_tools').'class.tx_wtools_pibase.php');
 
 require_once(t3lib_extMgm::extPath('w_form').'res/WForm/class.WForm2.php');
 require_once(t3lib_extMgm::extPath('w_form').'pi1/class.tx_wform_pi1_hook.php');

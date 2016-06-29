@@ -179,12 +179,12 @@ lib.cookieMessage   {
 
 
 
-# WTP INFOBOX v4.1
+# WTP INFOBOX v4.31
 # - keep in mind, that it disables cache on DEV
 
 lib.wtp_infobox = COA
 lib.wtp_infobox {
-	conf.version = 4.1
+	conf.version = 4.31
 	wrap = <div id="wtp_infobox" class="well well-sm" title="double click to toggle borders (DEV only)"> | </div>
 
 	# version display in markup

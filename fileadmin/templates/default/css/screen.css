@@ -138,7 +138,7 @@ p.bodytext a {
 
 
 
-/* WTP INFOBOX v4 */
+/* WTP INFOBOX v4.31 */
 #wtp_infobox	{
 	display: none;
 	visibility: hidden;	/* avoid blinking, unhide in js */
@@ -152,6 +152,7 @@ p.bodytext a {
 	padding: 10px;
 	cursor: move;
 	text-align: left;
+	background: #f5f5f5 url('data:image/gif;base64,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') scroll no-repeat 0 0;
 }
 #wtp_infobox p	{
 	margin-bottom: 2px;
@@ -178,5 +179,76 @@ p.bodytext a {
 .beuser		#wtp_infobox	{
 	display: block;
 }
+
+
+/* jqueryui resizable - used by wtp_infobox. can be removed, if whole ui css is included */
+.ui-resizable {
+	position: relative;
+}
+	.ui-resizable-handle {
+		position: absolute;
+		font-size: 0.1px;
+		display: block;
+	}
+	.ui-resizable-disabled .ui-resizable-handle,
+	.ui-resizable-autohide .ui-resizable-handle {
+		display: none;
+	}
+	.ui-resizable-n {
+		cursor: n-resize;
+		height: 7px;
+		width: 100%;
+		top: -5px;
+		left: 0;
+	}
+	.ui-resizable-s {
+		cursor: s-resize;
+		height: 7px;
+		width: 100%;
+		bottom: -5px;
+		left: 0;
+	}
+	.ui-resizable-e {
+		cursor: e-resize;
+		width: 7px;
+		right: -5px;
+		top: 0;
+		height: 100%;
+	}
+	.ui-resizable-w {
+		cursor: w-resize;
+		width: 7px;
+		left: -5px;
+		top: 0;
+		height: 100%;
+	}
+	.ui-resizable-se {
+		cursor: se-resize;
+		width: 12px;
+		height: 12px;
+		right: 1px;
+		bottom: 1px;
+	}
+	.ui-resizable-sw {
+		cursor: sw-resize;
+		width: 9px;
+		height: 9px;
+		left: -5px;
+		bottom: -5px;
+	}
+	.ui-resizable-nw {
+		cursor: nw-resize;
+		width: 9px;
+		height: 9px;
+		left: -5px;
+		top: -5px;
+	}
+	.ui-resizable-ne {
+		cursor: ne-resize;
+		width: 9px;
+		height: 9px;
+		right: -5px;
+		top: -5px;
+	}
 
 

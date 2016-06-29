@@ -123,9 +123,8 @@ TCEFORM {
 RTE.classes {
 	yellowLink {
 		name = Yellow Link
-		value = font-weight: bold;
+		value = font-weight: bold; color: yellow;
 	}
-		value = color: yellow;
 	phone	{
 		name = Phone
 		value = color: #749377;
