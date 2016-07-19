@@ -1,8 +1,0 @@
-* co zmienialem w moich extach i w przyszlosci przy odgrzebywaniu starych poprawic dla 6.2:
-
-
-- Usage of feInterface is no longer part of the TYPO3 CMS Core
-
-(sprawdzac, czy nie idzie 3 parametr w addTCAcolumns)
-
-- loadTCA()

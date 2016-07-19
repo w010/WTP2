@@ -6,7 +6,7 @@
 // v0.8
 // 2015
 //
-// dump / zapalniczka73
+// dump / ..zap....ka si tr
 // you should change default password
 
 // WARNING! THIS SCRIPT IS FOR PRIVATE DEV USE ONLY, DO NOT PUT IT ON PUBLIC!

@@ -187,7 +187,21 @@ RewriteRule .* index.php [L]
 
 ### End: Miscellaneous ###
 
-Order allow,deny
-Allow from all
 
+# apache 2.2
+#Order allow,deny
+#Allow from all
+
+# apache 2.4
+Require all granted
+
+
+
+	#AuthType Basic
+	#AuthName "DB Restricted access only"
+	#AuthUserFile /data/www/wolo/.htpasswd
+	#Require user gosc
+	#Require all denied
+	#Require ip 109.173
+	#Require local
 

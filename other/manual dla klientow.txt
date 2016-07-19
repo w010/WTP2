@@ -1,4 +1,0 @@
-MANUAL DLA KLIENTA
-
-
-- Treści powtarzalne pomiędzy stronami, takie jak stopka, loginbox itd. edytowalne są najczęściej na stronie STORAGE/Contents. W niektórych przypadkach, np. gdy jakiś element osadzony jest w jakimś specjalnym polu, a jest jednorazowy, może znajdować się on na stronie, na której jest wyświetlany, dostępny w Backendzie z poziomu menu List.
