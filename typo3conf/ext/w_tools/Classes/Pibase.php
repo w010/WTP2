@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2010 - 2015 wolo.pl <wolo.wolski@gmail.com>
+*  (c) 2010 - 2016 wolo.pl <wolo.wolski@gmail.com>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,7 +27,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
- * Pibase extended v5
+ * Pibase extended v6-registry
  *
  * @author	wolo.pl <wolo.wolski@gmail.com>
  * @package	TYPO3
@@ -35,19 +35,59 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	//var $extKey        = 'w_tools';	// The extension key.
+
+	// if in your ext you need to build some urls with added parameters, so cHash doesn't meet piVars anymore, set this to false
 	var $pi_checkCHash = true;
 
-	var $feUser;
+	/**
+	 * @var array $feUser
+	 * 			Should use Registry instead: $feUser = & \WTP\WTools\Registry::Cell('wtools', 'feUser');
+	 *          but for basic use can be accesed with this var
+	 *             // maybe it should stay here anyway
+	 */
+	public $feUser;
 
 
 	public function main($content, $conf)	{
-		$this->conf = $conf;
+
+			// Registry initialize - store common used objects and data references to not have to pass pObj over and over
+			// set random pluginInstanceId to separate data from second plugin instance on same page
+			// this is also an example of register already set variables (AFTER value setting) - have to copy the variable.
+			// think twice before using this with big data! and rather try to do this BEFORE
+			$_this = & \WTP\WTools\Registry::Cell('wtools', 'pi1', mt_rand(0, 100000000));
+			$_this = $this; // no & here!
+
+			// register some other often used things, like pivars, conf or feuser row
+			//$_piVars = & \WTP\WTools\Registry::Cell('wtools', 'piVars');
+			//$_piVars = $this->piVars;
+
+			// TEST NEW WAY
+				$_piVars = $this->piVars;   // copy current values
+				$this->piVars = & \WTP\WTools\Registry::Cell('wtools', 'piVars');   // make original var a reference
+				$this->piVars = $_piVars;   // restore values, but now it's a registry reference
+
+
+			// may be this way, because value set after register
+			// todo: sprawdzic w sposob jak pivars - czy mozliwe jest nadpisanie czegos w conf i czy to potem jest widoczne
+			$this->conf = & \WTP\WTools\Registry::Cell('wtools', 'conf');
+			$this->conf = $conf;
+
+				// todo: sprawdzic, czy np. nadpisanie cos w feuser widoczne jest zmienione dalej w pi1 wmedl
+				// to obecnie przez referencje do this->feuser i nadpisanie dziala spoko..
+					// mozna to w sumie zostawic jako property, moze sie przydac zreszta zerwie compatibility.
+				// keep this reference, feuser can be updated with helper fields
+
+				// add to Registry. leave this var global. there's not always need to use registry
+				$this->feUser = & \WTP\WTools\Registry::Cell('wtools', 'feUser');
+				$this->feUser = $this->getFeUser();
+
+				// is this working this way....? seems ok
+
+
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->pi_initPIflexForm();
 
-		// keep this reference, feuser can be updated with helper fields
-		$this->feUser = &$this->getFeuser();
 
 		// plugin initialize
 		$this->_initPlugin();
@@ -157,3 +197,7 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	}
 }
 
+
+if (!function_exists('debugster'))	{
+	function debugster($var)	{	return false; }
+}

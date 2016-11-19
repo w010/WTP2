@@ -79,6 +79,7 @@ $.ajax(this.href, {
       success: function(data) {
          $('#main').html($(data).find('#main *'));
 
+2016 - powyzsze dziala calkiem ok!
 
 
 uwaga - tu jest robiona lista ttnews dla pobierania ajaxem, ale warto pamietac, ze linki do tej

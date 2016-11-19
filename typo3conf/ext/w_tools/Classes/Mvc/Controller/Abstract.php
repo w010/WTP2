@@ -1,8 +1,8 @@
 <?php
 /**
- * wolo.pl '.' studio 2015
+ * wolo.pl '.' studio 2016
  *
- * w_tools MVC base 0.4
+ * w_tools MVC base 0.5
  */
 
 
@@ -14,18 +14,37 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
      */
     protected $Model;
 
+	/**
+	 * @return Tx_WTools_Mvc_Model_Abstract
+	 */
+	public function getModel() {
+		return $this->Model;
+	}
+	/**
+	 * @param Tx_WTools_Mvc_Model_Abstract $Model
+	 */
+	protected function setModel(&$Model) {
+		$this->Model = $Model;
+	}
+
+
 		/**
-		 * @return Tx_WTools_Mvc_Model_Abstract
+		 * @var Tx_WTools_Mvc_View_Default
 		 */
-		public function getModel() {
-			return $this->Model;
+		protected $View;
+		/**
+		 * @return Tx_WTools_Mvc_View_Default
+		 */
+		public function getView() {
+			return $this->View;
 		}
 		/**
-		 * @param Tx_WTools_Mvc_Model_Abstract $Model
+		 * @param Tx_WTools_Mvc_View_Default $View
 		 */
-		protected function setModel(&$Model) {
-			$this->Model = $Model;
+		protected function setView(&$View) {
+			$this->View = $View;
 		}
+
 
     /**
      * @var Tx_WTools_Mvc_Pibase
@@ -50,37 +69,45 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
 
 	/**
 	 * this should be object in future
-	 * @var array reference to feuser array
+	 * @var array reference to feUser array
 	 */
-	public $feuser;
+	public $feUser;
 
 		/**
 		 * @return array
 		 */
-		public function getFeuser() {
-			return $this->feuser;
+		public function getFeUser() {
+			return $this->feUser;
 		}
 		/**
-		 * @param array $feuser
+		 * @param array $feUser
 		 */
-		protected  function setFeuser(&$feuser) {
-			$this->feuser = $feuser;
+		protected  function setFeUser(&$feUser) {
+			$this->feUser = $feUser;
 		}
 
 
     /**
-     * @param $pObj Tx_WTools_Mvc_Pibase
-     * @param $Model Tx_WTools_Mvc_Model_Abstract
-	 * @param $controllerName string
-     * @param $displayMode string
+     * @param deprecated    Tx_WTools_Mvc_Pibase    $pObj
+     * @param Tx_WTools_Mvc_Model_Abstract  $Model
+     * @param string    $controllerName
+     * @param string    $displayMode
      */
     public function __construct(Tx_WTools_Mvc_Pibase &$pObj, Tx_WTools_Mvc_Model_Abstract &$Model, $controllerName, $displayMode)  {
-        $this->pObj = $pObj;
-        $this->conf = $pObj->conf;
-        $this->piVars = $pObj->piVars;
-        $this->controllerName = $controllerName;
+
+	        // this way should be used, instead of passing everything in params
+
+            //$this->pObj = $pObj;
+	        //$this->conf = $pObj->conf;
+	        //$this->piVars = &$pObj->piVars; // must be reference, pivar sometimes can be set to default if not present (seems not needed to be like this anymore)
+	        //$this->setFeUser( $pObj->getFeUser() );
+        $this->pObj = &\WTP\WTools\Registry::Cell('wtools', 'pi1');
+	    $this->conf = &\WTP\WTools\Registry::Cell('wtools', 'conf');
+	    $this->piVars = &\WTP\WTools\Registry::Cell('wtools', 'piVars');    // seems to be updated correctly after manually set pivar in child controller
+	    $this->feUser = &\WTP\WTools\Registry::Cell('wtools', 'feUser');
+
+	    $this->controllerName = $controllerName;
         $this->displayMode = $displayMode;
-		$this->setFeuser( $pObj->getFeuser() );
 		$this->setModel( $Model );
     }
 

@@ -41,13 +41,30 @@ abstract class Tx_WTools_Mvc_Model_Abstract	{
 		if (!is_array($dataArray))
 			return '("debug: prepareInStatement input not array!")';
 		if ($integer) {
-			$res = $GLOBALS['TYPO3_DB']->cleanIntArray($dataArray);
+			$res = $this->db()->cleanIntArray($dataArray);
 		} else {
 			$res = array_unique($dataArray);
 			// $res = $GLOBALS['TYPO3_DB']->fullQuoteArray($dataArray, '');
 		}
 		return '('.implode(',', $res).')';
 	}
+
+
+
+	/**
+	 * Replaces table name with short in enableColumns
+	 * todo: check if works correct and move to wtools model abstract
+	 *
+	 * @param string $table table name
+	 * @param string $short short from table
+	 * @return string
+	 */
+	function enableColumnsShort($table, $short)  {
+		return str_replace($table, $short, $this->pObj->cObj->enableFields($table));
+	}
+
+
+
 
 
 	/**

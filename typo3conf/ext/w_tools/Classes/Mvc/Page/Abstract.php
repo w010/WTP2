@@ -12,12 +12,12 @@
  * PAGE - z zalozenia cos jak kontroler, ale nie do konca - bardziej zbior kontrolerow, uruchamiajacy dopiero
  * odpowiednie kontrolery renderujace elementy takiej strony. posiada wlasny template, w ktorym osadza sie kontrolery-widoki
  */
-//abstract class tx_wtools_mvc_page_abstract {
+
 abstract class Tx_WTools_Mvc_Page_Abstract {
 
     protected $templateCode;
-    protected $markers = array();
-    protected $subparts = array();
+    protected $markers = [];
+    protected $subparts = [];
 
     /**
      * @var Tx_WTools_Mvc_Pibase
@@ -74,11 +74,12 @@ abstract class Tx_WTools_Mvc_Page_Abstract {
     }
 
 
-	/**
-	 * Get viewhelper - are sometimes useful in pages
-	 * @param $viewhelperName
-	 * @return mixed
-	 */
+    /**
+     * Get viewhelper - are sometimes useful in pages
+     * @param $viewhelperName
+     * @return mixed
+     * @throws Exception
+     */
 	public function Viewhelper($viewhelperName)	{
 		if (!is_object($this->Viewhelpers[$viewhelperName]))
 			Throw new Exception('no viewhelper named '.$viewhelperName.' - check in Page');
@@ -140,14 +141,23 @@ abstract class Tx_WTools_Mvc_Page_Abstract {
      * called always
      */
     protected function setMarkers()    {
-		// czemu nie DEV?
+		// czemu nie DEV? - bo latwiej znalezc
 		$this->assign('DEV_BOOL', DEV);
+		$this->assign('EXT_PREFIX', $this->pObj->prefixId);
     }
 
     protected function setSubparts()    {
 
     }
 
+
+    /**
+     * build page using template, markers and subparts
+     * use on finish of render() method
+     */
+    protected function make() {
+        return $this->pObj->cObj->substituteMarkerArrayCached($this->templateCode, $this->markers, $this->subparts);
+    }
 }
 
 

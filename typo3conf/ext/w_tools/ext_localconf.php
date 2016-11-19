@@ -44,5 +44,5 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPo
 
 
 if (TYPO3_MODE =='BE') {
-    require_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('w_tools').'class.tx_wtools_cms_layout.php');
+    require_once(TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('w_tools').'pi1/class.tx_wtools_cms_layout.php');
 }*/

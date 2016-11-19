@@ -44,22 +44,43 @@ class Tx_WTools_Mvc_Viewhelper_General	{
 	 * @param $fileName
 	 * @param bool $hasOwnImage - if original image is present or blank is used
 	 * @param string $viewName - to get proper ts setup for image
-	 * @internal param $userData
 	 * @return string
 	 */
 	public function makeImageTag($fileName, $hasOwnImage, $viewName)  {
+		$isFALReference = $fileName === intval($fileName);
+
 		if ($fileName)  {
-			$conf['file'] = $fileName;
-			$conf['file.'] = $this->conf['view.'][$viewName.'.']['image.'];
+			$conf['image.']['file'] = $fileName;    // sys_file_reference.uid that links a sys_file to e.g. a tt_content element (not sys_file.uid!)
+			$conf['image.']['file.'] = $this->pObj->conf['view.'][$viewName.'.']['image.'];
+			$conf['image.']['file.']['treatIdAsReference'] = $isFALReference;
+			// set in ts view.VIEWNAME.image.
+			//$conf['image.']['file.']['height'] = '150c';
+			//$conf['image.']['file.']['width'] = '150c';
+
+			$conf['image.']['params'] = $this->pObj->conf['view.'][$viewName.'.']['image.']['params'];
+			$conf['image.']['altText'] = $this->pObj->conf['view.'][$viewName.'.']['image.']['altText'];
+
 			if (!$hasOwnImage)
-				$conf['titleText'] = $this->pi_getLL('label_noimage', 'brak obrazka');
-			$image = $GLOBALS['TSFE']->cObj->IMG_RESOURCE($conf);
+				$conf['image.']['titleText'] = $this->pi_getLL('label_noimage', 'no image');
+
+			$theImgCode = $this->pObj->cObj->IMAGE($conf['image.']);
+			$image = $this->pObj->cObj->stdWrap($theImgCode, $this->pObj->conf['view.'][$viewName.'.']['image_stdWrap.']);
+
+			//$GLOBALS['TSFE']->lastImageInfo;	- if we need only image path
+			//$image = $GLOBALS['TSFE']->cObj->IMG_RESOURCE($conf);
+
+			/*debugster($conf);
+			debugster($theImgCode);
+			debugster($image);*/
+
+			if ($image)
+				return $image;
+			else
+				return DEV?'image generating error - check ts. view:'.$viewName:'';
 		}
 
-		if ($image)
-			// todo: alt and class configurable
-			return '<img src="'.$image.'" alt="avatar" class="img-responsive img-thumbnail">';
-		return DEV?'image error. view:'.$viewName:'';
+
+		return DEV?'image error - no image. view:'.$viewName:'';
 	}
 
 	/**

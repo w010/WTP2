@@ -24,7 +24,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
     }
 
 // GENERAL SYSTEM LINKS
-    public function makeLink($label, $piVars = [], $clear = 0, $cache = 1, $pid = null)  {      //array('view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid'])
+    public function makeLink($label, $piVars = [], $clear = 0, $cache = 1, $pid = null)  {      //['view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid']]
         if (!$pid)      $pid = null;
         // not sure about these params! check
         return $this->pObj->pi_linkTP_keepPIvars($label, $piVars, $clear, $cache, $pid);
@@ -38,7 +38,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
      * @param array $params - last param to leave compatibility with pibase calls, where this is not provided
      * @return string
      */
-    public function makeLink_url($piVars = [], $clear = 0, $cache = 1, $pid = null, $params = array())  {      //array('view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid'])
+    public function makeLink_url($piVars = [], $clear = 0, $cache = 1, $pid = null, $params = [])  {      //['view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid']]
         if (!$pid)      $pid = null;
         $pid = intval($pid);
         // not sure about these params! check links with no_debug or something
@@ -61,8 +61,6 @@ class Tx_WTools_Mvc_Viewhelper_Links {
 
 
 
-// TODO: CHECK WHY IS HERE sitedb_ajax
-
 
 
     /**
@@ -72,7 +70,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
      * @return string
      */
     public function makeLink_ajax_baseurl($config = []) {
-        return $this->makeLink_url( [], intval($config['clear']), !$config['no_cache'], $config['pid'], ['type'=>$GLOBALS['TSFE']->tmpl->setup['sitedb_ajax.']['typeNum']] );
+        return $this->makeLink_url( [], intval($config['clear']), !$config['no_cache'], $config['pid'], ['type'=>$GLOBALS['TSFE']->tmpl->setup['myext_ajax.']['typeNum']] );
     }
 
 	/**
@@ -85,10 +83,11 @@ class Tx_WTools_Mvc_Viewhelper_Links {
 	 * @return string link
 	 */
     public function makeAjaxLink_action($label, $action, $params, $conf = [])  {
-	    // remove > in case when by mistake pass full tag
+	        // remove > in case when by mistake pass full tag
 	    list ($conf['wrapA'], $conf['wrapB']) = explode('|', $conf['wrap']);
-        return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"') . ' onclick="'
-            . $this->makeAjaxCall_action($action, $params, $conf['containerAnimate'], true, $conf['successFunc']).'"'.($conf['class']?' class="'.$conf['class'].'"':'').'>'
+        return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"')
+            . ' onclick="' . $this->makeAjaxCall_action($action, $params, $conf['containerAnimate'], true, $conf['successFunc']).'"'
+            . ($conf['class']?' class="'.$conf['class'].'"':'').'>'
             . $label. ($conf['wrapB']?$conf['wrapB']:'</a>');
     }
 

@@ -10,9 +10,9 @@
 # writing. "version" and "dependencies" must not be touched!
 ########################################################################
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'Wolo.pl - toolkit / WTP',
-	'description' => 'Extensions tools and other useful stuff by wolo.pl. (Actually, it should been named "wtp") ',
+	'description' => 'Extensions tools and other useful stuff by wolo.pl. (Actually, it should have been named "wtp") ',
 	'category' => 'fe',
 	'author' => 'wolo.pl',
 	'author_email' => 'wolo.wolski@gmail.com',
@@ -29,16 +29,16 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '2.0.7',
-	'constraints' => array(
-		'depends' => array(
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+	'version' => '2.1.0',
+	'constraints' => [
+		'depends' => [
+		],
+		'conflicts' => [
+		],
+		'suggests' => [
+		],
+	],
 	'_md5_values_when_last_written' => '',
-);
+];
 
 ?>

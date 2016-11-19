@@ -14,6 +14,17 @@ plugin.tx_wtools {
 
 		class = img-rounded
 	}
+
+	# Caching Framework
+	# page cache tags are generated (for specified pages) that they can be flushed ie. by Cache
+
+	caching_framework	{
+		// enabled per page condition, when needed
+		#additionalTags {
+			// this is only key, checked on run if exists. it can be set to commalist of this type tags from plugin context, but usually tags are generated in CacheTagsGenerate hook
+			#feuser =
+		#}
+	}
 }
 
 

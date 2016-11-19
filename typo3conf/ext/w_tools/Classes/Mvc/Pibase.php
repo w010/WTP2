@@ -2,7 +2,7 @@
 /**
  * wolo.pl '.' studio 2015
  *
- * w_tools MVC base 0.2
+ * w_tools MVC base 0.21
  *
  * pibase with additional MVC helpers
  */
@@ -36,7 +36,7 @@ class Tx_WTools_Mvc_Pibase extends tx_wtools_pibase {
 
 
 	protected function catch_exception($e)  {
-		$this->addDebug('[EXCEPTION] '. $e->getMessage() . ' - in ' .$e->getFile() . ' ['.$e->getCode().']  - in line ' . $e->getLine(), 'errors');
+		$this->addDebug('[EXCEPTION] '. $e->getMessage() . ' - in ' .$e->getFile() . ' ['.$e->getCode().']  - in line ' . $e->getLine(), 'errors', 2);
 	}
 
 
@@ -53,25 +53,42 @@ class Tx_WTools_Mvc_Pibase extends tx_wtools_pibase {
 
 	/**
 	 * debug log function. if DEV, there will be debug table
-	 * @param string $note note content
-	 * @param string $key debug array group key, may be debug or errors
+	 *
+	 * @param string $content note content
+	 * @param string $key  debug array group key, may be debug or errors
+	 * @param int    $severity 0 is standard notice, -1 is less important, 1 = success, 2 = error
 	 */
-	public function addDebug($note, $key = 'debug')   {
-		$this->debugData[$key][] = $note;
+	public function addDebug($content, $key = 'debug', $severity = 0)   {
+		//$this->debugData[$key][] = $content;
+		$this->debugData[$key][] = ['content' => $content, 'severity' => $severity];
 	}
 
 	protected function renderDebug()	{
 		//echo $GLOBALS['TT']->printTSlog();
 				    	//die();
 		//debugster($this->debugData);
-		if ($this->mode['mode']=='ajax')   return false;
-	if (!$this->debug ||  $this->mode['mode']=='ajax')   return false;	//	? what's that?
-		$code =  implode('<br>', $this->debugData['errors']);
-		$code .= '<br>'.implode('<br>', $this->debugData['debug']);
+		//if ($this->mode['mode']=='ajax')   return false;
+		if (!$this->debug ||  $this->mode['mode']=='ajax')   return false;
+			// this old way doesn't work anymore
+			//$code =  implode('<br>', $this->debugData['errors'][0]);
+			//debugster($code);
+			//$code .= '<br>'.implode('<br>', $this->debugData['debug']);
+			//$code .= '<br>';
+		$code = '';
+		// todo: make sure, 'errors' and 'debug' indexes are always present! or it will display error in array_merge
+		$this->debugData['debug'] = array_merge($this->debugData['errors'], $this->debugData['debug']);
+		foreach ($this->debugData['debug'] as $debugRow) {
+			if (is_array($debugRow)) {
+				$style = $debugRow['severity'] == 2 ? ' style="color: red;"' :
+							($debugRow['severity'] == 1 ? ' style="color: green;"' :
+								($debugRow['severity'] == -1 ? ' style="color: lightgray;"' : '') );
+				$code .= '<p' . $style . '>' . $debugRow['content'] . '</p>';
+			}
+			else
+				$code .=  '<p>'.$debugRow.'</p>';
+		}
+
 		return '<div class="debugdata" style="border: 1px solid lightgray; padding: 5px; font-size: 70%;">'.$code.'</div>';
-		// recru version - why can't they work same way? (now is overwritten there)
-		// dbrecru is probably better - it has auto height on dblclick
-		return '<div class="debugdata" style="border: 1px solid lightgray; padding: 5px; font-size: 70%;">'.$code.'</div><script>$(function() { $(\'.tx-dbrecru-pi1 .debugdata\').draggable().dblclick(function(){   $(this).css(\'height\', \'auto\'); }); });</script>';
 	}
 }
 

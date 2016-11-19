@@ -1,9 +1,9 @@
 <?php
 
 /**
- * wXml
+ * wCsv
  * WTP CSV little helper
- * version 0.0.1
+ * version 0.0.2
  * wolo.pl TYPO3 pack
  *
  * Note that this can be a standalone class, so it doesn't fit into typo3 naming standards and doesn't use any typo3 functions
@@ -11,16 +11,6 @@
 class wCsv	{
 
 	protected $error = false;
-
-
-		/**
-		 * @param $csvFile
-		 * @deprecated
-		 * @return string
-		 */
-		function readCSV($csvFile){
-			return $this->getCsvFromFile($csvFile);
-		}
 
 
 	/**
@@ -60,7 +50,7 @@ class wCsv	{
 	 *
 	 * @param string $path
 	 * @param array  $options parameters for fgetcsv
-	 * @param bool   $utf8
+	 * @param bool   $utf8 - probably not needed anymore in newer php installations
 	 * @return SimpleXMLElement
 	 */
 	public function getCsvFromFile($path, $options = [], $utf8 = true)	{
@@ -83,6 +73,19 @@ class wCsv	{
 		fseek($handle, 0);
 		return $handle;
 	}
+
+
+
+
+		/**
+		 * @param $csvFile
+		 * @deprecated
+		 * @return string
+		 */
+		function readCSV($csvFile){
+			die ('readCSV() is deprecated, use getCsvFromFile() instead');
+			//return $this->getCsvFromFile($csvFile);
+		}
 }
 
 

@@ -81,7 +81,6 @@ class Tx_WTools_Mvc		{
 	 * @param Tx_WTools_Mvc_Pibase $pObj
 	 * @param string $modelName
 	 * @throws Exception
-	 * @internal param string $pageName - should be configurable from context (local extension which uses this) - for now just provide empty model extension class with _memcache suffix
 	 * @return Tx_WTools_Mvc_Model_Abstract
 	 */
 	static function getModel(&$pObj, $modelName = 'memcache')   {
@@ -101,7 +100,6 @@ class Tx_WTools_Mvc		{
 	 * @param string               $componentName
 	 * @param array                $params
 	 * @throws Exception
-	 * @internal param string $pageName - should be configurable from context (local extension which uses this) - for now just provide empty model extension class with _memcache suffix
 	 * @return Tx_WTools_Mvc_Component_Abstract
 	 */
 		static function getComponent(Tx_WTools_Mvc_Pibase &$pObj, $componentName, $params = [])   {
@@ -113,6 +111,46 @@ class Tx_WTools_Mvc		{
 			require_once($path);
 			return new $className($pObj, $componentName, $params);
 		}
+
+
+	/**
+	 * Returns other object - additional
+	 * todo: być może obiekt AJAX jednak stanie się rodzajem page, wtedy ta metoda będzie najpewniej zbędna, bo na ten moment tylko do tego służy.
+	 * jeśli to się zmieni, odnotować użycie tutaj
+	 * @param tx_wtools_pibase $pObj
+	 * @param string $objectName
+	 * @throws Exception
+	 * @return object
+	 */
+	static function getObject(&$pObj, $objectName)   {
+		$classNamePrefix = ExtensionManagementUtility::getCN($pObj->extKey);
+		$className = $classNamePrefix.'_'.$objectName;
+		$path = ExtensionManagementUtility::extPath($pObj->extKey).'Classes/'.$objectName.'.php';
+		if (!file_exists($path))
+			Throw new Exception('Fatal: object class file not found! Class '.$className.' for object '.$objectName);
+		require_once($path);
+		return new $className($pObj, $objectName);
+	}
+
+	/**
+	 * Returns viewhelper
+	 * todo: być może obiekt AJAX jednak stanie się rodzajem page, wtedy ta metoda będzie najpewniej zbędna, bo na ten moment tylko do tego służy.
+	 * jeśli to się zmieni, odnotować użycie tutaj
+	 *
+	 * @param tx_wtools_pibase $pObj
+	 * @param string $viewhelperName
+	 * @throws Exception
+	 * @return Tx_WTools_Mvc_Viewhelper_General
+	 */
+	static function getViewhelper(&$pObj, $viewhelperName)   {
+		$classNamePrefix = ExtensionManagementUtility::getCN($pObj->extKey);
+		$className = $classNamePrefix.'_viewhelper_'.$viewhelperName;
+		$path = ExtensionManagementUtility::extPath($pObj->extKey).'Classes/Viewhelper/'.$viewhelperName.'.php';
+		if (!file_exists($path))
+			Throw new Exception('Fatal: viewhelper class file not found! Class '.$className.' for viewhelper '.$viewhelperName);
+		require_once($path);
+		return new $className($pObj, $viewhelperName);
+	}
 }
 
 
