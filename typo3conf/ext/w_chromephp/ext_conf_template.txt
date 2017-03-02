@@ -1,0 +1,6 @@
+
+  # cat=basic; type=boolean; label=Use devIPmask:Use devIPmask from Install Tool / LocalConfiguration
+useDevIPmask = 1
+
+  # cat=basic; type=boolean; label=Include script with short function calls cp():Without it you can still use ChromePhp:: calls)
+includeShorthands = 1
