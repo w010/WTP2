@@ -5,23 +5,34 @@
  * w_tools MVC base 0.5
  */
 
+namespace WTP\WTools\Mvc\Controller;
 
 
-abstract class Tx_WTools_Mvc_Controller_Abstract {
+use WTP\WTools\Registry;
+use WTP\WTools\Mvc;
+
+
+//abstract class Tx_WTools_Mvc_Controller_Abstract {
+
+/**
+ * Class AbstractController
+ * @package WTP\WTools\Mvc
+ */
+abstract class AbstractController   {
 
     /**
-     * @var Tx_WTools_Mvc_Model_Abstract
+     * @var Mvc\Model\AbstractModel
      */
     protected $Model;
 
 	/**
-	 * @return Tx_WTools_Mvc_Model_Abstract
+	 * @return Mvc\Model\AbstractModel
 	 */
 	public function getModel() {
 		return $this->Model;
 	}
 	/**
-	 * @param Tx_WTools_Mvc_Model_Abstract $Model
+	 * @param Mvc\Model\AbstractModel $Model
 	 */
 	protected function setModel(&$Model) {
 		$this->Model = $Model;
@@ -29,17 +40,17 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
 
 
 		/**
-		 * @var Tx_WTools_Mvc_View_Default
+		 * @var Mvc\View\DefaultView
 		 */
 		protected $View;
 		/**
-		 * @return Tx_WTools_Mvc_View_Default
+		 * @return Mvc\View\DefaultView
 		 */
 		public function getView() {
 			return $this->View;
 		}
 		/**
-		 * @param Tx_WTools_Mvc_View_Default $View
+		 * @param Mvc\View\DefaultView $View
 		 */
 		protected function setView(&$View) {
 			$this->View = $View;
@@ -47,7 +58,7 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
 
 
     /**
-     * @var Tx_WTools_Mvc_Pibase
+     * @var \Tx_WTools_Mvc_Pibase
      */
     protected $pObj;
     /**
@@ -88,12 +99,11 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
 
 
     /**
-     * @param deprecated    Tx_WTools_Mvc_Pibase    $pObj
-     * @param Tx_WTools_Mvc_Model_Abstract  $Model
      * @param string    $controllerName
      * @param string    $displayMode
+     * @param Mvc\Model\AbstractModel $Model
      */
-    public function __construct(Tx_WTools_Mvc_Pibase &$pObj, Tx_WTools_Mvc_Model_Abstract &$Model, $controllerName, $displayMode)  {
+    public function __construct($controllerName, $displayMode, Mvc\Model\AbstractModel &$Model)  {
 
 	        // this way should be used, instead of passing everything in params
 
@@ -101,10 +111,14 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
 	        //$this->conf = $pObj->conf;
 	        //$this->piVars = &$pObj->piVars; // must be reference, pivar sometimes can be set to default if not present (seems not needed to be like this anymore)
 	        //$this->setFeUser( $pObj->getFeUser() );
-        $this->pObj = &\WTP\WTools\Registry::Cell('wtools', 'pi1');
-	    $this->conf = &\WTP\WTools\Registry::Cell('wtools', 'conf');
-	    $this->piVars = &\WTP\WTools\Registry::Cell('wtools', 'piVars');    // seems to be updated correctly after manually set pivar in child controller
-	    $this->feUser = &\WTP\WTools\Registry::Cell('wtools', 'feUser');
+        $this->pObj = &Registry::Cell('wtools', 'pi1');
+	    $this->conf = &Registry::Cell('wtools', 'conf');
+	    $this->piVars = &Registry::Cell('wtools', 'piVars');    // seems to be updated correctly after manually set pivar in child controller
+	    $this->feUser = &Registry::Cell('wtools', 'feUser');
+
+	    // namespace: get page name from the string
+	    if (strstr($controllerName, '\\'))
+		    $controllerName = end(explode('\\', $controllerName));
 
 	    $this->controllerName = $controllerName;
         $this->displayMode = $displayMode;
@@ -112,7 +126,7 @@ abstract class Tx_WTools_Mvc_Controller_Abstract {
     }
 
     public function render()   {
-        return 'error: no render() defined in controller '.get_class($this).'. controller extending Tx_WTools_Mvc_Controller_Abstract must have own render() method.';
+        return 'error: no render() defined in controller '.get_class($this).'. controller extending WTP\WTools\Mvc\Controller\AbstractController must have own render() method.';
     }
 
 

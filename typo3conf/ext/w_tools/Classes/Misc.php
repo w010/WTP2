@@ -6,6 +6,9 @@
  * When it gets too large, extract some functionality to own classes
  */
 
+die('should not be used!');
+// moved to Classes/Hooks/Misc
+
 
 class tx_wtools_misc {
 

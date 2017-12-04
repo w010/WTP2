@@ -14,7 +14,7 @@ class Tx_WTools_Mvc_Pibase extends tx_wtools_pibase {
 	/*protected $action;*/
 
 	/**
-	 * @var tx_wtools_mvc_page_abstract
+	 * @var \WTP\WTools\Mvc\Page\AbstractPage
 	 */
 	protected $PAGE;
 
@@ -68,7 +68,7 @@ class Tx_WTools_Mvc_Pibase extends tx_wtools_pibase {
 				    	//die();
 		//debugster($this->debugData);
 		//if ($this->mode['mode']=='ajax')   return false;
-		if (!$this->debug ||  $this->mode['mode']=='ajax')   return false;
+		if (!$this->debug  ||  $this->conf['mode']=='ajax')   return false;
 			// this old way doesn't work anymore
 			//$code =  implode('<br>', $this->debugData['errors'][0]);
 			//debugster($code);
@@ -82,10 +82,10 @@ class Tx_WTools_Mvc_Pibase extends tx_wtools_pibase {
 				$style = $debugRow['severity'] == 2 ? ' style="color: red;"' :
 							($debugRow['severity'] == 1 ? ' style="color: green;"' :
 								($debugRow['severity'] == -1 ? ' style="color: lightgray;"' : '') );
-				$code .= '<p' . $style . '>' . $debugRow['content'] . '</p>';
+				$code .= '<p' . $style . '>' . nl2br($debugRow['content']) . '</p>';
 			}
 			else
-				$code .=  '<p>'.$debugRow.'</p>';
+				$code .=  '<p>'.nl2br($debugRow).'</p>';
 		}
 
 		return '<div class="debugdata" style="border: 1px solid lightgray; padding: 5px; font-size: 70%;">'.$code.'</div>';

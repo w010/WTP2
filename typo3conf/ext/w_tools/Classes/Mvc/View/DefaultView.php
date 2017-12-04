@@ -1,16 +1,28 @@
 <?php
 /**
- * wolo.pl '.' studio 2015
+ * wolo.pl '.' studio 2016
  *
- * w_tools MVC base 0.31
+ * w_tools MVC base 0.5
  */
 
+namespace WTP\WTools\Mvc\View;
 
 
-class Tx_WTools_Mvc_View_Default {
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use WTP\WTools\Registry;
+use WTP\WTools\Mvc;
+
+
+//class Tx_WTools_Mvc_View_Default {
+
+/**
+ * Class DefaultView
+ * @package WTP\WTools\Mvc
+ */
+class DefaultView {
 
 	/**
-	 * @var Tx_WTools_Mvc_Pibase
+	 * @var \Tx_WTools_Mvc_Pibase
 	 */
 	public $pObj;
 
@@ -23,6 +35,12 @@ class Tx_WTools_Mvc_View_Default {
 	 * @var array
 	 */
 	public $conf;
+
+	/**
+	 * conf of selected view
+	 * @var array
+	 */
+	public $lConf;
 
 	/**
 	 * @var string
@@ -39,30 +57,36 @@ class Tx_WTools_Mvc_View_Default {
 	protected $subparts = [];
 
 	/**
-	 * @var Tx_WTools_Mvc_Model_Abstract
+	 * @var Mvc\Model\AbstractModel
 	 */
 	protected $Model;
 		/**
-		 * @return Tx_WTools_Mvc_Model_Abstract
+		 * @return Mvc\Model\AbstractModel
 		 */
 		public function getModel() {
 			return $this->Model;
 		}
 		/**
-		 * @param Tx_WTools_Mvc_Model_Abstract $Model
+		 * @param Mvc\Model\AbstractModel $Model
 		 */
 		protected function setModel(&$Model) {
 			$this->Model = $Model;
 		}
 
 	/**
-	 * @var Tx_WTools_Mvc_Controller_Abstract
+	 * @var Mvc\Controller\AbstractController
 	 */
 	protected $Controller;
 	/**
 	 * @var array
 	 */
 	protected $Viewhelpers = [];
+
+		/** @var Mvc\Viewhelper\Links */
+		public $ViewhelperLinks;
+
+		/** @var Mvc\Viewhelper\General */
+		public $ViewhelperGeneral;
 
 	/**
 	 * @var array - data to display, set by controller
@@ -95,35 +119,42 @@ class Tx_WTools_Mvc_View_Default {
 
 
 	/**
-	 * @param $pObj		Tx_WTools_Mvc_Pibase
-	 * @param $Model	   Tx_WTools_Mvc_Model_Abstract
-	 * @param $Controller  Tx_WTools_Mvc_Controller_Abstract
 	 * @param $viewName	string
 	 * @param $displayMode string - part of model method name, could be like 'userComments'
-	 * @throws Exception
-	 * @return \Tx_WTools_Mvc_View_Default
+	 * @param $Model	   Mvc\Model\AbstractModel
+	 * @param $Controller  Mvc\Controller\AbstractController
+	 * @throws \Exception
+	 * @return DefaultView
 	 */
-	public function __construct(&$pObj, Tx_WTools_Mvc_Model_Abstract &$Model, Tx_WTools_Mvc_Controller_Abstract &$Controller, $viewName, $displayMode)  {
-		$this->pObj = $pObj;
-		$this->cObj = $pObj->cObj;
-		$this->conf = $pObj->conf;
-		$this->setFeUser( $pObj->getFeUser() );
+	public function __construct($viewName, $displayMode, Mvc\Model\AbstractModel &$Model, Mvc\Controller\AbstractController &$Controller)  {
+		$this->pObj = &Registry::Cell('wtools', 'pi1');
+		$this->cObj = $this->pObj->cObj;
+		$this->conf = $this->pObj->conf;
+		$this->setFeUser( $this->pObj->getFeUser() );
 		$this->setModel( $Model );
 		$this->Controller = $Controller;
+
+		// namespace: get page name from the string
+		if (strstr($viewName, '\\'))
+			$viewName = end(explode('\\', $viewName));
+
 		$this->viewName = $viewName;
 		$this->displayMode = $displayMode;
 		// todo later: these should be made using Tx_WTools_Mvc::getViewhelper, but for now for compatibility it only allow to create lowercase-named objects
 		// it should be reworked in future when migrating w_social and related to camelcase
-		$this->Viewhelpers['general'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance( 'Tx_WTools_Mvc_Viewhelper_General', $pObj);
-		$this->Viewhelpers['links'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance( 'Tx_WTools_Mvc_Viewhelper_Links', $pObj);
+		$this->ViewhelperGeneral = $this->Viewhelpers['general'] = GeneralUtility::makeInstance( 'WTP\WTools\Mvc\Viewhelper\General');
+		$this->ViewhelperLinks = $this->Viewhelpers['links'] = GeneralUtility::makeInstance( 'WTP\WTools\Mvc\Viewhelper\Links');
 		// note: don't use yet viewhelpers in construct, because they can be overwritten in child views
+
+		// conf of current view
+		$this->lConf = &$this->pObj->conf['view.'][$viewName.'.'];  // also see below - should be merged with displaymode, and also todo: make _default and first merge with it
 
 		// merge displaymode conf into view conf & set
 		//if (is_array($this->conf['view.'][$viewName.'.']) && $this->conf['displayMode.'][$displayMode.'.'])
 		  //  $this->conf['view.'][$viewName] = array_replace_recursive($this->conf['view.'][$viewName.'.'], $this->conf['displayMode.'][$displayMode.'.']);
 		// that means, even if it's ajax call, it doesn't mean the current controller is in ajax mode. it could be child controller, like comments in articles ajax load
-		$this->setTemplateCode( $this->pObj->cObj->fileResource( $this->getTemplatePath() ),  $this->pObj->conf['mode']=='ajax' && $pObj->piVars['ajaxType'] == 'getResults' && $pObj->piVars['controller'] == $this->Controller->getControllerName() );
-		if (!$this->getTemplateCode())	  Throw new Exception('Fatal: no template found for View '.$viewName.' - looking in: '.$this->getTemplatePath());
+		$this->setTemplateCode( $this->pObj->cObj->fileResource( $this->getTemplatePath() ),  $this->pObj->conf['mode']=='ajax' && $this->pObj->piVars['ajaxType'] == 'getResults' && $this->pObj->piVars['controller'] == $this->Controller->getControllerName() );
+		if (!$this->getTemplateCode())	  Throw new \Exception('Fatal: no template found for View '.$viewName.' - looking in: '.$this->getTemplatePath());
 		//$this->pObj->addDebug('-- template for view '.$viewName.' ready');
 		$this->addViewClassName( $this->viewName );
 		if ($this->displayMode != $this->viewName)	  $this->addViewClassName( $this->displayMode );
@@ -167,12 +198,12 @@ class Tx_WTools_Mvc_View_Default {
 
 	/**
 	 * @param $viewhelperName
-	 * @return Tx_WTools_Mvc_Viewhelper_Links
-	 * @throws Exception
+	 * @return Mvc\Viewhelper\AbstractViewhelper, \WTP\WTools\Mvc\Viewhelper\Links, \WTP\WTools\Mvc\Viewhelper\General
+	 * @throws \Exception
 	 */
 	public function Viewhelper($viewhelperName)	{
 		if (!is_object($this->Viewhelpers[$viewhelperName]))
-			Throw new Exception('no viewhelper named '.$viewhelperName.' - check in View');
+			Throw new \Exception('no viewhelper named '.$viewhelperName.' - check in View');
 		return $this->Viewhelpers[$viewhelperName];
 	}
 
@@ -181,7 +212,11 @@ class Tx_WTools_Mvc_View_Default {
 	 * @param array $data
 	 */
 	public function setData($data)  {
-		$this->data = $data;
+		if (is_array($data))
+			$this->data = $data;
+		else
+			// possible reason is database select failure and false is returned from query exec
+			$this->pObj->addDebug('data set to view is not an array as expected! please check why. (db query error?)', 'debug', 2);
 	}
 
 
@@ -198,7 +233,7 @@ class Tx_WTools_Mvc_View_Default {
 	public function setTemplateCode($templateCode, $ajax)  {
 		$this->templateCode = $templateCode;
 		//$this->pObj->addDebug('set template for view');
-		// if items loaded with ajax, only show items, without context, load buttons, headers etc.
+		// if items loaded with ajax, only show items, without context, load buttons, headers etc. (getResults)
 		if ($ajax)  {
 			$this->templateCode = '###SUB_SINGLE###' . $this->pObj->cObj->getSubpart($this->templateCode, '###SUB_SINGLE###') . '###SUB_SINGLE###';
 			$this->pObj->addDebug('- template in ajax mode - only SUB_SINGLE subpart');
@@ -244,7 +279,7 @@ class Tx_WTools_Mvc_View_Default {
 	 * @param bool $returnArray - return array with markers instead of assigning them - to use in sub loops
 	 */
 	protected function makeUniversalLabelsFromLocallang($fields, &$returnArray = null)   {
-		$fieldsArr = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $fields, true);
+		$fieldsArr = GeneralUtility::trimExplode(',', $fields, true);
 		foreach ($fieldsArr as $fieldName)	{
 			// (w starszych wersjach bylo label.xxx, ale kropki sa problematyczne przy ustawianiu przez ts)
 			if (is_array($returnArray))
@@ -253,17 +288,43 @@ class Tx_WTools_Mvc_View_Default {
 				$this->assign( 'LABEL_'.strtoupper($fieldName), $this->pObj->pi_getLL('label_'.$fieldName, 'default label_'.$fieldName));
 		}
 	}
-	
+
 	/**
-	 *  just to call it yet shorter, old-style to use like this->pi_getLL
+	 * Just to call it yet shorter, old-style to use like this->pi_getLL
+	 * @param $label
+	 * @param $default
+	 * @return string
 	 */
 	public function pi_getLL($label, $default){
-		return $this->Viewhelper('general')->pi_getLL($label, $default);
+		return $this->pObj->pi_getLL($label, $default);
 	}
 
 
+	/**
+	 * quick wrap function. same as in viewhelper
+	 *
+	 * @param string $item
+	 * @param mixed  $wrap
+	 * @return string
+	 */
+	public function wrap($item, $wrap)	{
+		$wrapA = '';
+		$wrapB = '';
+		if (is_string($wrap))
+			list ($wrapA, $wrapB) = explode('|', $wrap);
 
-	
+		return $wrapA . $item . $wrapB;
+	}
+
+
+	/**
+	 * Renders Content Element
+	 * @param $uid
+	 * @return string
+	 */
+	public function renderCE($uid)	{
+		return $this->pObj->renderCE($uid);
+	}
 }
 
 

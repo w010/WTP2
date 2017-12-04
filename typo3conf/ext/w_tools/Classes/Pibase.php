@@ -111,6 +111,7 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	}
 
 	protected function _getTSConfVar($var) {
+		$value = null;
 		if (isset($this->conf[$var]) && isset($this->conf[$var.'.'])) {
 			return $this->cObj->cObjGetSingle($this->conf[$var], $this->conf[$var.'.']);
 		} else if (isset($this->conf[$var])) {
@@ -135,7 +136,7 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	}
 
 	function getRealIpAddr() {
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from shared internet
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {   //to check ip is pass from proxy
 			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -158,7 +159,7 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	/**
 	 * @return array
 	 */
-	public function &getFeuser() {
+	public function &getFeUser() {
 		$feuser = &$GLOBALS['TSFE']->fe_user->user;
         return $feuser;
     }
@@ -179,13 +180,13 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
      * @return string html
      */
     function renderCE($uid)	{
-		$conf = Array ();
+		$conf = [];
 		$conf['1'] = 'RECORDS';
-		$conf['1.'] = Array (
+		$conf['1.'] = [
 			'tables' => 'tt_content',
 			'source' => intval($uid),
 			'dontCheckPid' => 1
-		);
+		];
 		return $this->cObj->cObjGet($conf);
 	}
 

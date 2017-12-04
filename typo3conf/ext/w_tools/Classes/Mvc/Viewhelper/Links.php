@@ -1,27 +1,20 @@
 <?php
 /**
- * wolo.pl '.' studio 2015
+ * wolo.pl '.' studio 2016
  *
- * w_tools MVC base 0.2
+ * w_tools MVC base 0.5
  *
  * Viewhelper - links
  */
 
+namespace WTP\WTools\Mvc\Viewhelper;
 
 
-// todo: abstract viewhelper
+//class Tx_WTools_Mvc_Viewhelper_Links {
+
+class Links extends AbstractViewhelper	{
 
 
-class Tx_WTools_Mvc_Viewhelper_Links {
-
-    /**
-     * @var Tx_WTools_Mvc_Pibase
-     */
-    protected $pObj;
-
-    public function __construct(tx_wtools_pibase &$pObj)   {
-        $this->pObj = $pObj;
-    }
 
 // GENERAL SYSTEM LINKS
     public function makeLink($label, $piVars = [], $clear = 0, $cache = 1, $pid = null)  {      //['view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid']]
@@ -43,7 +36,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
         $pid = intval($pid);
         // not sure about these params! check links with no_debug or something
         //return $this->pObj->pi_linkTP_keepPIvars_url($params, $clear, $cache, $pid);
-        $this->pObj->pi_linkTP('|', Array($this->pObj->prefixId=>$piVars)+$params, intval($cache), $pid);
+        $this->pObj->pi_linkTP('|', [$this->pObj->prefixId=>$piVars]+$params, intval($cache), $pid);
         return $this->pObj->cObj->lastTypoLinkUrl;
     }
 
@@ -70,8 +63,27 @@ class Tx_WTools_Mvc_Viewhelper_Links {
      * @return string
      */
     public function makeLink_ajax_baseurl($config = []) {
-        return $this->makeLink_url( [], intval($config['clear']), !$config['no_cache'], $config['pid'], ['type'=>$GLOBALS['TSFE']->tmpl->setup['myext_ajax.']['typeNum']] );
+        return $this->makeLink_url( [], intval($config['clear']), !$config['no_cache'], $config['pid'], ['type'=>$GLOBALS['TSFE']->tmpl->setup[ $this->pObj->extKey . '_ajax.' ]['typeNum']] );
     }
+
+
+	/**
+	 * General ajax button
+	 *
+	 * @param string $label  - link/button label
+	 * @param string $onclick
+	 * @param array  $conf - can pass successFunc, wraps or own onclick
+	 * @return string link
+	 */
+	public function makeAjaxLink($label, $onclick, $conf = [])  {
+		// remove > in case when by mistake pass full tag
+		list ($conf['wrapA'], $conf['wrapB']) = explode('|', $conf['wrap']);
+		return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"')
+			. ' onclick="' . $onclick .'"'
+			. ($conf['class']?' class="'.$conf['class'].'"':'').'>'
+			. $label. ($conf['wrapB']?$conf['wrapB']:'</a>');
+	}
+
 
 	/**
 	 * General ajax action call
@@ -79,32 +91,43 @@ class Tx_WTools_Mvc_Viewhelper_Links {
 	 * @param string $label  - link/button label
 	 * @param string $action
 	 * @param string $params - JSON!
-	 * @param array  $conf - can pass successFunc or wraps
+	 * @param array  $conf - can pass successFunc, wraps or own onclick
 	 * @return string link
 	 */
     public function makeAjaxLink_action($label, $action, $params, $conf = [])  {
-	        // remove > in case when by mistake pass full tag
-	    list ($conf['wrapA'], $conf['wrapB']) = explode('|', $conf['wrap']);
-        return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"')
-            . ' onclick="' . $this->makeAjaxCall_action($action, $params, $conf['containerAnimate'], true, $conf['successFunc']).'"'
-            . ($conf['class']?' class="'.$conf['class'].'"':'').'>'
-            . $label. ($conf['wrapB']?$conf['wrapB']:'</a>');
+
+    	return $this->makeAjaxLink(
+    		$label,
+		    $this->makeAjaxCall_action($action, $params, $conf['containerAnimate'], true, $conf['successFunc'], $conf),
+		    $conf
+	    );
+
+		    /*    // remove > in case when by mistake pass full tag
+		    list ($conf['wrapA'], $conf['wrapB']) = explode('|', $conf['wrap']);
+	        return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"')
+	            . ' onclick="' . $this->makeAjaxCall_action($action, $params, $conf['containerAnimate'], true, $conf['successFunc'], $conf) .'"'
+	            . ($conf['class']?' class="'.$conf['class'].'"':'').'>'
+	            . $label. ($conf['wrapB']?$conf['wrapB']:'</a>');*/
     }
 
 	/**
 	 * General ajax action call - only onclick js
+	 * WARNING - note, that fourth param is not the same as in js callAction() method - here it's additional return false, in js it's a dom caller (this should be normalized in future)
 	 *
 	 * @param string $action
-	 * @param string $params           - JSON!
+	 * @param string $params - JSON!
 	 * @param string $containerAnimate - jquery selector
-	 * @param bool   $addReturnFalse
+	 * @param bool $addReturnFalse
 	 * @param string $successFunc
+	 * @param array $conf
 	 * @return string onclick
 	 */
-    public function makeAjaxCall_action($action, $params, $containerAnimate = null, $addReturnFalse = true, $successFunc = '')  {
-        $str = 'Social.callAction(\''.$action.'\', '.$params.', "'.$containerAnimate.'", this'.($successFunc?', '.$successFunc:'').');'.($addReturnFalse?'return false;':'');
-        return str_replace('"', '&quot;', $str);
-    }
+	public function makeAjaxCall_action($action, $params, $containerAnimate = null, $addReturnFalse = true, $successFunc = '', $conf = [])  {
+		//if (!$params)      $params = "''";  // because you can pass json with js here
+		if (!$params)      $params = "{}";  // because you can pass json with js here, it may be empty string also, which is not compatible with js / json
+		$str = 'Social.callAction(\''.$action.'\', '.$params.', '.($conf['containerAnimateRaw']?$containerAnimate: '\''.$containerAnimate.'\'').', this'.($successFunc?', '.$successFunc:'').');'.($addReturnFalse?'  return false;':'');
+		return str_replace('"', '&quot;', $str);
+	}
 
 
 	/**
@@ -138,8 +161,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
 	 */
     public function makeAjaxCall_load($controller, $displayMode, $offset, $additionalPiVars = [], $specifiedContainer = '', $onlyUrl = false, $conf = []) {
         $piVars = ['ajaxType'=>'getResults', 'controller'=>$controller, 'displayMode'=>$displayMode?$displayMode:$controller, 'offset'=>$offset] + $additionalPiVars;
-        // todo kiedys: type number from config
-        $url = $this->makeLink_url($piVars, 0, 1, '', ['type'=>944]);
+        $url = $this->makeLink_url($piVars, 0, 1, '', ['type'=>$GLOBALS['TSFE']->tmpl->setup[ $this->pObj->extKey . '_ajax.' ]['typeNum']]);
         return $onlyUrl ? $url : str_replace('"', '&quot;', 'Social.getResults(\''.$url.'\', this, \'\', null, false, '.json_encode($conf).'); return false;' );
     }
 
@@ -154,18 +176,7 @@ class Tx_WTools_Mvc_Viewhelper_Links {
 		return '<input type="checkbox" name="'.$formFieldname.'" value="1" onclick="'.$onclick.'"'.$checked.'>';
 	}
 	
-	
-	// why not cobj/stdwrap?
-	// duplicated with general viewhelper
-	public function wrap($string, $wrap)    {
-		$wrapParts = explode('|', $wrap);
-		return $wrapParts[0] . $string . $wrapParts[1];
-	}
 
-	// also needed here. maybe rework viewhelpers idea?
-	public function pi_getLL($label, $default = '')  {
-		return $this->pObj->pi_getLL($label, $default);
-	}
 
 }
 

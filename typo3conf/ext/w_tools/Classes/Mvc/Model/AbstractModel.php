@@ -1,15 +1,27 @@
 <?php
 /**
- * wolo.pl '.' studio 2015
+ * wolo.pl '.' studio 2016
  *
- * w_tools MVC base 0.3
+ * w_tools MVC base 0.5
  */
 
+namespace WTP\WTools\Mvc\Model;
 
-abstract class Tx_WTools_Mvc_Model_Abstract	{
+
+use WTP\WTools\Registry;
+use WTP\WTools\Mvc;
+
+
+//abstract class Tx_WTools_Mvc_Model_Abstract	{
+
+/**
+ * Class AbstractModel
+ * @package WTP\WTools\Mvc
+ */
+abstract class AbstractModel	{
 
     /**
-     * @var Tx_WTools_Mvc_Pibase
+     * @var \Tx_WTools_Mvc_Pibase
      */
     protected $pObj;
 
@@ -23,8 +35,8 @@ abstract class Tx_WTools_Mvc_Model_Abstract	{
 	}
     
     
-    protected function init(&$pObj)	{
-		$this->pObj = $pObj;
+    protected function init()	{
+	    $this->pObj = &Registry::Cell('wtools', 'pi1');
     }
 
 
@@ -53,7 +65,7 @@ abstract class Tx_WTools_Mvc_Model_Abstract	{
 
 	/**
 	 * Replaces table name with short in enableColumns
-	 * todo: check if works correct and move to wtools model abstract
+	 * todo: check if works correct
 	 *
 	 * @param string $table table name
 	 * @param string $short short from table
@@ -104,10 +116,9 @@ abstract class Tx_WTools_Mvc_Model_Abstract	{
     static protected $_instance = null;
 
 	/**
-	 * @param Tx_WTools_Mvc_Pibase $pObj
-	 * @return Tx_WTools_Mvc_Model_Abstract
+	 * @return AbstractModel
 	 */
-	static public function & Instance(Tx_WTools_Mvc_Pibase &$pObj) {
+	static public function & Instance() {
         /*if (is_null(self::$_instance))  {
 			self::$_instance = new self($pObj);
         }
@@ -117,21 +128,20 @@ abstract class Tx_WTools_Mvc_Model_Abstract	{
         nowa wersja singleton, która poprawnie dziedziczy w nowych wersjach php
         */
         if (!isset(static::$_instance)) {
-            static::$_instance = new static($pObj);
+            static::$_instance = new static();
         }
 
         return static::$_instance;
     }
 
 	/**
-	 * @param $pObj Tx_WTools_Mvc_Pibase
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-    private function __construct(&$pObj)  {
-		if (!$pObj) throw new Exception('no pObj passed to model constructor!');
+    private function __construct()  {
+		//if (!$pObj) throw new Exception('no pObj passed to model constructor!');
         // Do normal instance initialisation here
         // Nothing singleton-related should be present
-        $this->init($pObj);
+        $this->init();
     }
 
     public function __destruct()    {
