@@ -3,20 +3,10 @@
 namespace WTP\WTools;
 
 
-// compatibility
 /**
- * Class tx_wtools_log
+ * Class Log
  * @package WTP\WTools
- * @deprecated
  */
-class tx_wtools_log extends Log {
-    public function __construct($file) {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        parent::__construct($file);
-    }
-}
-
-
 
 class Log  {
 
@@ -39,8 +29,4 @@ class Log  {
         fwrite($filePointer, $logMsg);
         fclose($filePointer);
     }
-    
-
 }
-
-?>

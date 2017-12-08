@@ -1,36 +1,94 @@
 
-#
-# main setup custom options for WTP2
-# (copy to fileadmin/templates)
-#
+# todo: make this included static template
 
 plugin.tx_wtools {
+
+	debugBoxCss = COA
+	debugBoxCss.10 = TEXT
+	debugBoxCss.10.value (
+
+		.tx-wtools-debugbox  {
+			position: fixed;
+			top: 100px;
+			right: -220px;
+			z-index: 1000;
+			background-color: #fff;
+			width: 600px;
+			height: 350px;
+			overflow: scroll;
+			line-height: 1em;
+		}
+
+		.tx-wtools-debugbox .drag {
+			width: 30px;
+			height: 15px;
+			background: gray;
+			cursor: move;
+			margin-bottom: 5px;
+			float: left;
+			margin-right: 20px;
+		}
+
+		.tx-wtools-debugbox .wipelog	{
+			width: 30px;
+			height: 15px;
+			background: lightpink;
+			cursor: pointer;
+			margin-bottom: 5px;
+			float: right;
+		}
+
+		.tx-wtools-debugbox .switch-severity	{
+			width: 15px;
+			height: 15px;
+			color: lightgray;
+			background: none;
+			cursor: pointer;
+			float: left;
+			margin: 0 5px;
+			padding-top: 2px;
+			text-align: center;
+		}
+		.tx-wtools-debugbox .switch-severity.active	{
+			background: lightgray;
+			color: black;
+		}
+
+		.tx-wtools-debugbox p								{	display: none;	}
+		.tx-wtools-debugbox.show-severity--1 p.severity--1 {	display: block;	}
+		.tx-wtools-debugbox.show-severity-0 p.severity-0 	{	display: block;	}
+		.tx-wtools-debugbox.show-severity-1 p.severity-1 	{	display: block;	}
+		.tx-wtools-debugbox.show-severity-2 p.severity-2 	{	display: block;	}
+
+	)
+
+
 	# fe_users table's column with avatar, mostly to display it in top menu (@see menu IProcFunc)
-	avatarField = image
+	#avatarField = image
 
-	avatarTopMenu	{
-		width = 20m
-		height = 20m
+	#avatarTopMenu	{
+	#	width = 20m
+	#	height = 20m
 
-		class = img-rounded
-	}
+	#	class = img-rounded
+	#}
 
 	# Caching Framework
 	# page cache tags are generated (for specified pages) that they can be flushed ie. by Cache
-
-	caching_framework	{
-		// enabled per page condition, when needed
-		#additionalTags {
-			// this is only key, checked on run if exists. it can be set to commalist of this type tags from plugin context, but usually tags are generated in CacheTagsGenerate hook
-			#feuser =
-		#}
-	}
+	#caching_framework	{
+		# enabled per page condition, when needed
+	#	additionalTags {
+			# this is only key, checked on run if exists. it can be set to commalist of this type tags from plugin context, but usually tags are generated in CacheTagsGenerate hook
+	#		feuser =
+	#	}
+	#}
 }
 
 
 
 
 # page type for ajax
+# todo: make this included static template or remove
 wtools_ttnews_ajax = PAGE
 wtools_ttnews_ajax	{
 	typeNum = 950
@@ -50,9 +108,8 @@ wtools_ttnews_ajax	{
 		#no_cache = 1
 		debug = 0
 		disableAllHeaderCode = 1
-		# tak debugster nie dziala
 		additionalHeaders = Content-type:application/json
-    	xhtml_cleaning = 0
+		xhtml_cleaning = 0
 	}
 }
 

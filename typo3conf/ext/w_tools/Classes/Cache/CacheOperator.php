@@ -6,6 +6,7 @@
  
 namespace WTP\WTools\Cache;
 
+use WTP\WTools\AbstractPlugin;
 use WTP\WTools\Signal;
 
 /**
@@ -18,7 +19,7 @@ class CacheOperator	 implements Signal\SignalClient {
 			//protected $conf = [];
 
 	/**
-	 * @var \Tx_WTools_Mvc_Pibase|null
+	 * @var AbstractPlugin|null
 	 */
 	protected $pObj = null;
 

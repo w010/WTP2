@@ -20,7 +20,7 @@ class Links extends AbstractViewhelper	{
     public function makeLink($label, $piVars = [], $clear = 0, $cache = 1, $pid = null)  {      //['view'=>'single', 'mode'=>'rooms', 'uid'=>$row['uid']]
         if (!$pid)      $pid = null;
         // not sure about these params! check
-        return $this->pObj->pi_linkTP_keepPIvars($label, $piVars, $clear, $cache, $pid);
+        return $this->pObj->pi_linkTP_keepPIvars($label, $piVars, $cache, $clear, $pid);
     }
 
     /**
@@ -79,7 +79,7 @@ class Links extends AbstractViewhelper	{
 		// remove > in case when by mistake pass full tag
 		list ($conf['wrapA'], $conf['wrapB']) = explode('|', $conf['wrap']);
 		return ($conf['wrapA']?str_replace('>','',$conf['wrapA']):'<a href="#"')
-			. ' onclick="' . $onclick .'"'
+			. ' onclick="' . $onclick .'  return false;"'
 			. ($conf['class']?' class="'.$conf['class'].'"':'').'>'
 			. $label. ($conf['wrapB']?$conf['wrapB']:'</a>');
 	}

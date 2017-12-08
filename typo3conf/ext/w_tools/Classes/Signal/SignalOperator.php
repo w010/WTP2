@@ -6,6 +6,7 @@
 
 namespace WTP\WTools\Signal;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use WTP\WTools\Mvc\AbstractPluginMvc;
 
 
 /**
@@ -89,7 +90,7 @@ class SignalOperator {
 	 * @return array [or array of namespaces]
 	 */
 	static public function getSignals($namespace = 'default', $_debug_getAll = false)	{
-		if (DEV && $_debug_getAll)
+		if ((defined('DEV') && DEV) && $_debug_getAll)
 			return self::$signals;
 		return self::$signals[ $namespace ];
 	}
@@ -178,7 +179,7 @@ class SignalOperator {
 
 	/**
 	 * Get parent / plugin instance
-	 * @return \Tx_WTools_Mvc_Pibase (it has addDebug method)
+	 * @return AbstractPluginMvc (it has addDebug method)
 	 */
 	static public function &getPobj()	{
 		return \WTP\WTools\Registry::Cell('wtools', 'pi1');

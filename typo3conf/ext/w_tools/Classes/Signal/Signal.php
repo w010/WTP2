@@ -55,16 +55,15 @@ class Signal {
 	protected function getSignalBacktrace()	{
 		// you can always use this:
 		//echo "<pre>";	debug_print_backtrace(0, 7); //die(); // try
-
+		$hops = [];
 		// borrowed from ext:beko_debugster - thanks for this legendary extension ;)
 		$backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS );	// important - save memory
-		for ($i=  4  ;$i<  8  ;$i++)	{
+		for ($i =  4  ;$i<  8  ;$i++)	{
 			$bt = $backtrace[$i];
 			if (!$bt) { break; }
 			$hops[] = sprintf('%s -> %s()  : %d ', $bt['class'], $bt['function'], $bt['line']);
 		}
-		//debugster($hops);
-		//debugster($backtrace);
+
 		return $hops;
 	}
 

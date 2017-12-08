@@ -52,11 +52,15 @@ class General extends AbstractViewhelper	{
 			if ($image)
 				return $image;
 			else
-				return DEV?'image generating error - check ts. view:'.$viewName:'';
+				return (defined('DEV') && DEV)
+					? 'image generating error - check ts. view: ' . $viewName
+					: '';
 		}
 
 
-		return DEV?'image error - no image. view:'.$viewName:'';
+		return (defined('DEV') && DEV)
+			? 'image error - no image. view: ' . $viewName
+			: '';
 	}
 
 	/**

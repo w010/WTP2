@@ -46,15 +46,15 @@ class Mvc		{
      * Returns Controller object
      * @param $controllerName string
      * @param $displayMode string
-     * @param $Model Mvc\Model\AbstractModel
+     * @param $Model Mvc\Model\AbstractModel|null - you can pass Model directly ie. in Page, or not if you create specific Model inside your Controller
      * @throws \Exception
      * @return object, Mvc\Controller\AbstractController
      */
-    static function getController($controllerName, $displayMode, Mvc\Model\AbstractModel &$Model)   {
+    static function getController($controllerName, $displayMode, $Model = null)   {
 	    $pObj = &Registry::Cell('wtools', 'pi1');
 
 	    if (strstr($controllerName, '\\'))
-		    return GeneralUtility::makeInstance($controllerName, $controllerName, $displayMode, $Model);  // pass it's name to itself
+		    return GeneralUtility::makeInstance($controllerName, $controllerName, $displayMode, $Model);  // pass its name to itself
 
 		$classNamePrefix = ExtensionManagementUtility::getCN($pObj->extKey);
 	    $className = $classNamePrefix.'_controller_'.$controllerName;
@@ -77,6 +77,10 @@ class Mvc		{
 
 	    $Model = $Controller->getModel();
 
+	    // if Model is not found in Controller, you must pass it when creating Controller or create later in its init() method
+	    if (!$Model)
+		    Throw new \Exception('Fatal: View '.$viewName.' cannot retrieve Model from Controller '.$Controller->getControllerName());
+
 	    if (strstr($viewName, '\\'))
 		    return GeneralUtility::makeInstance($viewName, $viewName, $displayMode?$displayMode:$Controller->getDisplayMode(), $Model, $Controller);  // pass it's name to itself
 
@@ -96,14 +100,15 @@ class Mvc		{
 	 * model should represent data types, plus general model for non-standard
 	 *
 	 * @param string $modelName
+	 * @param bool $forceRefresh - rebuild singleton on demand
+	 * @return Mvc\Model\AbstractModel
 	 * @throws \Exception
-	 * @return object, Mvc\Model\AbstractModel
 	 */
-	static function getModel($modelName = 'Memcache')   {
+	static function getModel($modelName, $forceRefresh = false)   {
 		$pObj = &Registry::Cell('wtools', 'pi1');
 
 		if (strstr($modelName, '\\'))
-			return $modelName::Instance();
+			return $modelName::Instance($forceRefresh);
 
 
 		$classNamePrefix = ExtensionManagementUtility::getCN($pObj->extKey);
@@ -112,7 +117,7 @@ class Mvc		{
 		if (!file_exists($path))
 			Throw new \Exception('Fatal: model class file not found! Class <i>'.$className.'</i> for model <b>'.$modelName.'</b>. Should be in '.$path);
 		require_once($path);
-		return $className::Instance();
+		return $className::Instance($forceRefresh);
 	}
 
 	/**

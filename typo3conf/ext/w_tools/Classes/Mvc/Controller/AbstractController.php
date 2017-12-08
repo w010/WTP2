@@ -12,7 +12,6 @@ use WTP\WTools\Registry;
 use WTP\WTools\Mvc;
 
 
-//abstract class Tx_WTools_Mvc_Controller_Abstract {
 
 /**
  * Class AbstractController
@@ -25,24 +24,25 @@ abstract class AbstractController   {
      */
     protected $Model;
 
-	/**
-	 * @return Mvc\Model\AbstractModel
-	 */
-	public function getModel() {
-		return $this->Model;
-	}
-	/**
-	 * @param Mvc\Model\AbstractModel $Model
-	 */
-	protected function setModel(&$Model) {
-		$this->Model = $Model;
-	}
-
-
 		/**
-		 * @var Mvc\View\DefaultView
+		 * @return Mvc\Model\AbstractModel
 		 */
-		protected $View;
+		public function getModel() {
+			return $this->Model;
+		}
+		/**
+		 * @param Mvc\Model\AbstractModel $Model
+		 */
+		protected function setModel(&$Model) {
+			$this->Model = $Model;
+		}
+
+
+	/**
+	 * @var Mvc\View\DefaultView
+	 */
+	protected $View;
+
 		/**
 		 * @return Mvc\View\DefaultView
 		 */
@@ -58,7 +58,7 @@ abstract class AbstractController   {
 
 
     /**
-     * @var \Tx_WTools_Mvc_Pibase
+     * @var Mvc\AbstractPluginMvc
      */
     protected $pObj;
     /**
@@ -77,13 +77,23 @@ abstract class AbstractController   {
      * @var string
      */
     protected $displayMode;
+	/**
+	 * @var bool
+	 */
+	protected $isAjax;
+
+		/**
+		 * @return bool
+		 */
+		public function isAjax() {
+			return $this->isAjax;
+		}
 
 	/**
 	 * this should be object in future
 	 * @var array reference to feUser array
 	 */
 	public $feUser;
-
 		/**
 		 * @return array
 		 */
@@ -101,16 +111,12 @@ abstract class AbstractController   {
     /**
      * @param string    $controllerName
      * @param string    $displayMode
-     * @param Mvc\Model\AbstractModel $Model
+     * @param Mvc\Model\AbstractModel|null $Model   - optional, may be given or created in controller
      */
-    public function __construct($controllerName, $displayMode, Mvc\Model\AbstractModel &$Model)  {
+    public function __construct($controllerName, $displayMode, $Model)  {
 
 	        // this way should be used, instead of passing everything in params
 
-            //$this->pObj = $pObj;
-	        //$this->conf = $pObj->conf;
-	        //$this->piVars = &$pObj->piVars; // must be reference, pivar sometimes can be set to default if not present (seems not needed to be like this anymore)
-	        //$this->setFeUser( $pObj->getFeUser() );
         $this->pObj = &Registry::Cell('wtools', 'pi1');
 	    $this->conf = &Registry::Cell('wtools', 'conf');
 	    $this->piVars = &Registry::Cell('wtools', 'piVars');    // seems to be updated correctly after manually set pivar in child controller
@@ -121,10 +127,26 @@ abstract class AbstractController   {
 		    $controllerName = end(explode('\\', $controllerName));
 
 	    $this->controllerName = $controllerName;
-        $this->displayMode = $displayMode;
+        $this->displayMode = $displayMode ? $displayMode : 'default';
+	    // that means, even if it's ajax call, it doesn't mean the current controller is in ajax mode. it could be child controller, like comments in articles ajax load
+	    $this->isAjax = $this->pObj->conf['mode'] == 'ajax'  &&  $this->pObj->piVars['controller'] == $this->getControllerName();
 		$this->setModel( $Model );
+	    $this->init();
     }
 
+	/**
+	 * @return void
+	 */
+	public function init() {
+
+	}
+
+
+	/**
+	 * MAIN CONTENT
+	 *
+	 * @return string
+	 */
     public function render()   {
         return 'error: no render() defined in controller '.get_class($this).'. controller extending WTP\WTools\Mvc\Controller\AbstractController must have own render() method.';
     }
@@ -145,15 +167,16 @@ abstract class AbstractController   {
 
 
     /**
-     * @return \tx_wtools_pibase
+     * @return Mvc\AbstractPluginMvc
      */
     public function getPObj()    {
         return $this->pObj;
     }
 
 		/**
-	     * podmiana onclick przycisku load, zeby po zaladowaniu mogl odpytac o kolejne
-		 * to na pewno nie jest najlepszy sposob, w jaki mozna to bylo zrobic.
+		 * Swap load button onclick after loading items, that it may load another ie. with increased or decreased offset
+		 * This probably isn't the best way to achieve that, but I still don't have better idea
+		 *
 	     * @return string
 	     */
 	    public function swapLoadOnclick()  {

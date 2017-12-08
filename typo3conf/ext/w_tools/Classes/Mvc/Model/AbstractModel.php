@@ -21,7 +21,7 @@ use WTP\WTools\Mvc;
 abstract class AbstractModel	{
 
     /**
-     * @var \Tx_WTools_Mvc_Pibase
+     * @var \WTP\WTools\Mvc\AbstractPluginMvc
      */
     protected $pObj;
 
@@ -65,7 +65,6 @@ abstract class AbstractModel	{
 
 	/**
 	 * Replaces table name with short in enableColumns
-	 * todo: check if works correct
 	 *
 	 * @param string $table table name
 	 * @param string $short short from table
@@ -108,6 +107,18 @@ abstract class AbstractModel	{
 
 
 
+	/**
+	 * Log query to debug
+	 *
+	 * @param string $methodName
+	 */
+	protected function debugQuery($methodName) {
+		if ($GLOBALS['wtools_showSQL'])
+			$this->pObj->addDebug('<b>'.$methodName.'</b> query: '.$this->db()->debug_lastBuiltQuery, 'debug', -1);
+	}
+
+
+
 
 	/**
      * SINGLETON PATTERN
@@ -116,16 +127,17 @@ abstract class AbstractModel	{
     static protected $_instance = null;
 
 	/**
+	 * @param bool $forceRefresh
 	 * @return AbstractModel
 	 */
-	static public function & Instance() {
-        /*if (is_null(self::$_instance))  {
-			self::$_instance = new self($pObj);
-        }
-        return self::$_instance;*/
-        
+	static public function & Instance($forceRefresh = false) {
+
+		if ($forceRefresh)  {
+			static::$_instance = null;
+		}
+
         /*
-        nowa wersja singleton, która poprawnie dziedziczy w nowych wersjach php
+            new singleton, which properly inherits in newer php versions
         */
         if (!isset(static::$_instance)) {
             static::$_instance = new static();

@@ -8,12 +8,13 @@
 namespace WTP\WTools\Mvc\Page;
 
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WTP\WTools\Registry;
 use WTP\WTools\Mvc;
 
 
 
-//abstract class Tx_WTools_Mvc_Page_Abstract {
+
 
 /**
  * Class AbstractPage
@@ -33,7 +34,7 @@ abstract class AbstractPage {
     protected $subparts = [];
 
     /**
-     * @var \Tx_WTools_Mvc_Pibase
+     * @var Mvc\AbstractPluginMvc
      */
     public $pObj;
     /**
@@ -162,7 +163,12 @@ abstract class AbstractPage {
      */
     protected function setMarkers()    {
 		// why not 'DEV'? - because it's easier to find
-		$this->assign('DEV_BOOL', defined('DEV') && DEV  ? 'true' : 'false');
+	    $this->assign('DEV_BOOL', (
+	            (defined('DEV') && DEV)
+			    ||  GeneralUtility::getApplicationContext() == 'Development'
+				||  $this->conf['debug']
+	        ) ? 'true' : 'false');
+
 		$this->assign('EXT_PREFIX', $this->pObj->prefixId);
 		//$this->assign('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] . '/');
 	    //$this->assign('BASE_URL', ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['SERVER_NAME'] . '/');

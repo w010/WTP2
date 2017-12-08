@@ -8,8 +8,8 @@
 $path = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('w_tools');
 
 return [
-	'tx_wtools_pibase' => $path.'Classes/Pibase.php',
-	'tx_wtools_log' => $path.'Classes/Log.php',
+	'tx_wtools_pibase' => $path.'Classes/Compatibility/tx_wtools_pibase.php',
+	'tx_wtools_log' => $path.'Classes/Compatibility/tx_wtools_log.php',
 	'wXml' => $path.'Classes/wXml.php',
 	'wCsv' => $path.'Classes/wCsv.php',
 

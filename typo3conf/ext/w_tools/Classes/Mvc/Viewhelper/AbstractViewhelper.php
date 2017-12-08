@@ -9,12 +9,12 @@
 
 namespace WTP\WTools\Mvc\Viewhelper;
 
-//class Tx_WTools_Mvc_Viewhelper_General	{
+
 
 class AbstractViewhelper    {
 
     /**
-     * @var \Tx_WTools_Mvc_Pibase
+     * @var \WTP\WTools\AbstractPlugin
      */
     protected $pObj;
 

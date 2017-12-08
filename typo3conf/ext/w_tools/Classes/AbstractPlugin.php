@@ -21,9 +21,10 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
-//namespace WTP\WTools;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+namespace WTP\WTools;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
@@ -33,7 +34,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * @package	TYPO3
  * @subpackage	tx_wtools
  */
-class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
+class AbstractPlugin extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	//var $extKey        = 'w_tools';	// The extension key.
 
 	// if in your ext you need to build some urls with added parameters, so cHash doesn't meet piVars anymore, set this to false
@@ -94,13 +95,21 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	}
 
 
+	/**
+	 * Called always. May be rewritten in plugin
+	 */
 	protected function _initPlugin() {
 
 	}
 
 	/**
-	* standard configuration methods thanks to Ryzy :)
-	*/
+	 * standard configuration methods thanks to Ryzy :)
+	 * @param string $var
+	 * @param string $sheetName
+	 * @param string $lang
+	 * @param string $field
+	 * @return null|string
+	 */
 	public function getConfVar($var, $sheetName = 'sDEF', $lang = 'lDEF', $field = 'pi_flexform') {
 		if (!is_array($this->cObj->data[$field]))
 			return $this->_getTSConfVar($var);
@@ -128,15 +137,22 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	}
 
 
-
+	/**
+	 * If ts noBaseClassWrap = 1 then only content is returned, without any pibase wraps
+	 * @param string $content
+	 * @return string
+	 */
 	function pi_wrapInBaseClass($content)	{
 		if (!$this->conf['noBaseClassWrap'])
 			return parent::pi_wrapInBaseClass($content);
 		return $content;
 	}
 
+	/**
+	 * @return string
+	 */
 	function getRealIpAddr() {
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from shared internet
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {   //to check ip is pass from proxy
 			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -169,14 +185,14 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 	 * shorthand for database with code completion
 	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
 	 */
-	public function db()   {
+	public function &db()   {
 		return $GLOBALS['TYPO3_DB'];
 	}
 
 
 	/**
      * Render content element
-     * @param $uid of CE
+     * @param int $uid of CE
      * @return string html
      */
     function renderCE($uid)	{
@@ -190,11 +206,13 @@ class tx_wtools_pibase extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin    {
 		return $this->cObj->cObjGet($conf);
 	}
 
+	/**
+	 * @param $linkData
+	 */
 	protected function redirect($linkData)	{
 		//$location = 'http://'.t3lib_div::getThisUrl().$this->cObj->getTypoLink_URL($linkData);
 		$location = $this->cObj->getTypoLink_URL($linkData);
-		header('Location: '.$location);
-		exit();
+		\TYPO3\CMS\Core\Utility\HttpUtility::redirect($location);
 	}
 }
 

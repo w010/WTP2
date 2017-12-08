@@ -13,7 +13,7 @@ use WTP\WTools\Registry;
 use WTP\WTools\Mvc;
 
 
-//class Tx_WTools_Mvc_View_Default {
+
 
 /**
  * Class DefaultView
@@ -22,7 +22,7 @@ use WTP\WTools\Mvc;
 class DefaultView {
 
 	/**
-	 * @var \Tx_WTools_Mvc_Pibase
+	 * @var Mvc\AbstractPluginMvc
 	 */
 	public $pObj;
 
@@ -121,17 +121,17 @@ class DefaultView {
 	/**
 	 * @param $viewName	string
 	 * @param $displayMode string - part of model method name, could be like 'userComments'
-	 * @param $Model	   Mvc\Model\AbstractModel
+	 * @param $Model	   Mvc\Model\AbstractModel|null   - optional, may be given or created in controller
 	 * @param $Controller  Mvc\Controller\AbstractController
 	 * @throws \Exception
 	 * @return DefaultView
 	 */
-	public function __construct($viewName, $displayMode, Mvc\Model\AbstractModel &$Model, Mvc\Controller\AbstractController &$Controller)  {
+	public function __construct($viewName, $displayMode, $Model, Mvc\Controller\AbstractController &$Controller)  {
 		$this->pObj = &Registry::Cell('wtools', 'pi1');
 		$this->cObj = $this->pObj->cObj;
 		$this->conf = $this->pObj->conf;
 		$this->setFeUser( $this->pObj->getFeUser() );
-		$this->setModel( $Model );
+		$this->setModel( $Model ? $Model : $Controller->getModel() );
 		$this->Controller = $Controller;
 
 		// namespace: get page name from the string
@@ -152,8 +152,8 @@ class DefaultView {
 		// merge displaymode conf into view conf & set
 		//if (is_array($this->conf['view.'][$viewName.'.']) && $this->conf['displayMode.'][$displayMode.'.'])
 		  //  $this->conf['view.'][$viewName] = array_replace_recursive($this->conf['view.'][$viewName.'.'], $this->conf['displayMode.'][$displayMode.'.']);
-		// that means, even if it's ajax call, it doesn't mean the current controller is in ajax mode. it could be child controller, like comments in articles ajax load
-		$this->setTemplateCode( $this->pObj->cObj->fileResource( $this->getTemplatePath() ),  $this->pObj->conf['mode']=='ajax' && $this->pObj->piVars['ajaxType'] == 'getResults' && $this->pObj->piVars['controller'] == $this->Controller->getControllerName() );
+
+		$this->setTemplateCode( $this->pObj->cObj->fileResource( $this->getTemplatePath() ),  $this->Controller->isAjax()  &&  $this->pObj->piVars['ajaxType'] == 'getResults' );
 		if (!$this->getTemplateCode())	  Throw new \Exception('Fatal: no template found for View '.$viewName.' - looking in: '.$this->getTemplatePath());
 		//$this->pObj->addDebug('-- template for view '.$viewName.' ready');
 		$this->addViewClassName( $this->viewName );
@@ -292,11 +292,12 @@ class DefaultView {
 	/**
 	 * Just to call it yet shorter, old-style to use like this->pi_getLL
 	 * @param $label
-	 * @param $default
+	 * @param string $default
+	 * @param bool $hsc
 	 * @return string
 	 */
-	public function pi_getLL($label, $default){
-		return $this->pObj->pi_getLL($label, $default);
+	public function pi_getLL($label, $default = '', $hsc = false)   {
+		return $this->pObj->pi_getLL($label, $default, $hsc);
 	}
 
 

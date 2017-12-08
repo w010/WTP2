@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = [
 	'title' => 'Wolo.pl - toolkit / WTP',
-	'description' => 'Extensions tools and other useful stuff by wolo.pl. (Actually, it should have been named "wtp") ',
+	'description' => 'Extensions tools and other useful stuff by wolo.pl. MVC base for classic pibase plugins',
 	'category' => 'fe',
 	'author' => 'wolo.pl',
 	'author_email' => 'wolo.wolski@gmail.com',
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = [
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '2.2.0',
+	'version' => '2.5.0',
 	'constraints' => [
 		'depends' => [
 		],
